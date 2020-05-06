@@ -1,0 +1,1745 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.6.1 -->
+<title>Filtering file content with the grep command | On computers, networks, and security</title>
+<meta name="generator" content="Jekyll v4.0.0" />
+<meta property="og:title" content="Filtering file content with the grep command" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Cheatsheet on the grep command in macos" />
+<meta property="og:description" content="Cheatsheet on the grep command in macos" />
+<link rel="canonical" href="https://antoinechoffrut.github.io/com-net-sec/cheatsheet/2020/05/05/grep-cheatsheet.html" />
+<meta property="og:url" content="https://antoinechoffrut.github.io/com-net-sec/cheatsheet/2020/05/05/grep-cheatsheet.html" />
+<meta property="og:site_name" content="On computers, networks, and security" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2020-05-05T00:00:00-05:00" />
+<script type="application/ld+json">
+{"description":"Cheatsheet on the grep command in macos","@type":"BlogPosting","headline":"Filtering file content with the grep command","dateModified":"2020-05-05T00:00:00-05:00","datePublished":"2020-05-05T00:00:00-05:00","mainEntityOfPage":{"@type":"WebPage","@id":"https://antoinechoffrut.github.io/com-net-sec/cheatsheet/2020/05/05/grep-cheatsheet.html"},"url":"https://antoinechoffrut.github.io/com-net-sec/cheatsheet/2020/05/05/grep-cheatsheet.html","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/com-net-sec/assets/css/style.css"><link type="application/atom+xml" rel="alternate" href="https://antoinechoffrut.github.io/com-net-sec/feed.xml" title="On computers, networks, and security" /><link rel="shortcut icon" type="image/x-icon" href="/com-net-sec/images/favicon.ico"><!-- Begin Jekyll SEO tag v2.6.1 -->
+<title>Filtering file content with the grep command | On computers, networks, and security</title>
+<meta name="generator" content="Jekyll v4.0.0" />
+<meta property="og:title" content="Filtering file content with the grep command" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Cheatsheet on the grep command in macos" />
+<meta property="og:description" content="Cheatsheet on the grep command in macos" />
+<link rel="canonical" href="https://antoinechoffrut.github.io/com-net-sec/cheatsheet/2020/05/05/grep-cheatsheet.html" />
+<meta property="og:url" content="https://antoinechoffrut.github.io/com-net-sec/cheatsheet/2020/05/05/grep-cheatsheet.html" />
+<meta property="og:site_name" content="On computers, networks, and security" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2020-05-05T00:00:00-05:00" />
+<script type="application/ld+json">
+{"description":"Cheatsheet on the grep command in macos","@type":"BlogPosting","headline":"Filtering file content with the grep command","dateModified":"2020-05-05T00:00:00-05:00","datePublished":"2020-05-05T00:00:00-05:00","mainEntityOfPage":{"@type":"WebPage","@id":"https://antoinechoffrut.github.io/com-net-sec/cheatsheet/2020/05/05/grep-cheatsheet.html"},"url":"https://antoinechoffrut.github.io/com-net-sec/cheatsheet/2020/05/05/grep-cheatsheet.html","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+<link href="https://unpkg.com/@primer/css/dist/primer.css" rel="stylesheet" />
+<link rel="stylesheet" href="//use.fontawesome.com/releases/v5.0.7/css/all.css"><link type="application/atom+xml" rel="alternate" href="https://antoinechoffrut.github.io/com-net-sec/feed.xml" title="On computers, networks, and security" />
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js"></script>
+<script type="text/javascript">
+require.config({
+  paths: {
+    jquery: 'https://code.jquery.com/jquery-3.5.0.min',
+    plotly: 'https://cdn.plot.ly/plotly-latest.min'
+  },
+
+  shim: {
+    plotly: {
+      deps: ['jquery'],
+      exports: 'plotly'
+    }
+  }
+});
+</script>
+
+<script>
+function wrap_img(fn) {
+    if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
+        var elements = document.querySelectorAll(".post img");
+        Array.prototype.forEach.call(elements, function(el, i) {
+            if (el.getAttribute("title") && (el.className != "emoji")) {
+                const caption = document.createElement('figcaption');
+                var node = document.createTextNode(el.getAttribute("title"));
+                caption.appendChild(node);
+                const wrapper = document.createElement('figure');
+                wrapper.className = 'image';
+                el.parentNode.insertBefore(wrapper, el);
+                el.parentNode.removeChild(el);
+                wrapper.appendChild(el);
+                wrapper.appendChild(caption);
+            }
+        });
+    } else { document.addEventListener('DOMContentLoaded', fn); }
+}
+window.onload = wrap_img;
+</script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function(){
+    // add link icon to anchor tags
+    var elem = document.querySelectorAll(".anchor-link")
+    elem.forEach(e => (e.innerHTML = '<i class="fas fa-link fa-xs"></i>'));
+    });
+</script>
+</head><body><header class="site-header">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/com-net-sec/">On computers, networks, and security</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/com-net-sec/about/">About Me</a><a class="page-link" href="/com-net-sec/search/">Search</a><a class="page-link" href="/com-net-sec/categories/">Tags</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">Filtering file content with the `grep` command</h1><p class="page-description">Cheatsheet on the grep command in macos</p><p class="post-meta post-meta-title"><time class="dt-published" datetime="2020-05-05T00:00:00-05:00" itemprop="datePublished">
+        May 5, 2020
+      </time>
+       • <span class="read-time" title="Estimated read time">
+    
+    
+      6 min read
+    
+</span></p>
+
+    
+      <p class="category-tags"><i class="fas fa-tags category-tags-icon"></i></i> 
+      
+        <a class="category-tags-link" href="/com-net-sec/categories/#cheatsheet">cheatsheet</a>
+        
+      
+      </p>
+    
+
+    
+      
+        <div class="pb-5 d-flex flex-wrap flex-justify-end">
+          <div class="px-2">
+
+    <a href="https://github.com/antoinechoffrut/com-net-sec/tree/master/_notebooks/2020-05-05-grep-cheatsheet.ipynb" role="button" target="_blank">
+<img class="notebook-badge-image" src="/com-net-sec/assets/badges/github.svg" alt="View On GitHub">
+    </a>
+</div>
+
+          <div class="px-2">
+    <a href="https://mybinder.org/v2/gh/antoinechoffrut/com-net-sec/master?filepath=_notebooks%2F2020-05-05-grep-cheatsheet.ipynb" target="_blank">
+        <img class="notebook-badge-image" src="/com-net-sec/assets/badges/binder.svg" alt="Open In Binder"/>
+    </a>
+</div>
+
+          <div class="px-2">
+    <a href="https://colab.research.google.com/github/antoinechoffrut/com-net-sec/blob/master/_notebooks/2020-05-05-grep-cheatsheet.ipynb" target="_blank">
+        <img class="notebook-badge-image" src="/com-net-sec/assets/badges/colab.svg" alt="Open In Colab"/>
+    </a>
+</div>
+        </div>
+      </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <ul class="section-nav">
+<li class="toc-entry toc-h1"><a href="#References">References </a>
+<ul>
+<li class="toc-entry toc-h2"><a href="#Documentation.">Documentation. </a></li>
+<li class="toc-entry toc-h2"><a href="#Sample-text-files">Sample text files </a></li>
+</ul>
+</li>
+<li class="toc-entry toc-h1"><a href="#System-information">System information </a></li>
+<li class="toc-entry toc-h1"><a href="#Basic-usage">Basic usage </a>
+<ul>
+<li class="toc-entry toc-h2"><a href="#Match-a-string">Match a string </a></li>
+<li class="toc-entry toc-h2"><a href="#Insert-line-number:--n">Insert line number: -n </a></li>
+<li class="toc-entry toc-h2"><a href="#Highlight-match:---color">Highlight match: --color </a></li>
+<li class="toc-entry toc-h2"><a href="#Match-count:--c">Match count: -c </a></li>
+<li class="toc-entry toc-h2"><a href="#Case-insensitive-match">Case-insensitive match </a></li>
+<li class="toc-entry toc-h2"><a href="#File-names-with-a-match:--l">File names with a match: -l </a></li>
+<li class="toc-entry toc-h2"><a href="#Position-of-match-in-file:--b">Position of match in file: -b </a></li>
+<li class="toc-entry toc-h2"><a href="#Include/exclude-files:---include,---exclude">Include/exclude files: --include, --exclude </a></li>
+<li class="toc-entry toc-h2"><a href="#Whole-word-match:--w">Whole word match: -w </a></li>
+<li class="toc-entry toc-h2"><a href="#Lines-before/after/around-match">Lines before/after/around match </a></li>
+</ul>
+</li>
+<li class="toc-entry toc-h1"><a href="#Regular-expressions">Regular expressions </a>
+<ul>
+<li class="toc-entry toc-h2"><a href="#Word-anchors:-^,-$,-\>,-\>,-\b">Word anchors: ^, $, \&gt;, \&gt;, \b </a></li>
+<li class="toc-entry toc-h2"><a href="#Boolean-OR">Boolean OR </a></li>
+<li class="toc-entry toc-h2"><a href="#Character-classes">Character classes </a></li>
+</ul>
+</li>
+<li class="toc-entry toc-h1"><a href="#TODO">TODO </a></li>
+</ul><!--
+#################################################
+### THIS FILE WAS AUTOGENERATED! DO NOT EDIT! ###
+#################################################
+# file to edit: _notebooks/2020-05-05-grep-cheatsheet.ipynb
+-->
+
+<div class="container" id="notebook-container">
+        
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p></p>
+<div class="flash flash-warn">
+    <svg class="octicon octicon-zap" viewbox="0 0 10 16" version="1.1" width="10" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M10 7H6l3-7-9 9h4l-3 7 9-9z"></path></svg>
+    <strong>Important: </strong>The exclamation mark <code>!</code> and percent <code>%</code> symbols at the beginning of the lines should be ignored.  Indeed, this page is generated from a <code>jupyter notebook</code>, each cell of which runs <code>python</code> code.  In order to run <code>shell</code> commands (as "magic commands") one inserts a <code>!</code> or <code>%</code> at the beginning of the line.
+</div>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="References">
+<a class="anchor" href="#References" aria-hidden="true"><span class="octicon octicon-link"></span></a>References<a class="anchor-link" href="#References"> </a>
+</h1>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Documentation.">
+<a class="anchor" href="#Documentation." aria-hidden="true"><span class="octicon octicon-link"></span></a>Documentation.<a class="anchor-link" href="#Documentation."> </a>
+</h2>
+<ul>
+<li><a href="https://ss64.com/osx/grep.html"><code>man</code> page documentation</a></li>
+<li>
+<a href="https://www.tldp.org/LDP/Bash-Beginners-Guide/html/sect_04_02.html">Examples using <code>grep</code></a> (tldp.org)</li>
+<li>
+<a href="https://www.gnu.org/software/grep/manual/html_node/Character-Classes-and-Bracket-Expressions.html">Character classes and bracket expressions</a> (gnu.org)</li>
+<li><a href="https://alvinalexander.com/unix/edu/examples/grep.shtml">A large collection of Unix/Linux ‘grep’ command examples</a></li>
+<li><a href="https://www.thegeekstuff.com/2011/10/grep-or-and-not-operators/">grep or and not operators</a></li>
+<li>
+<p><a href="https://www.thegeekstuff.com/2009/03/15-practical-unix-grep-command-examples/">15 practical unix grep command examples</a></p>
+</li>
+<li>
+<p><a href="https://unix.stackexchange.com/questions/121739/whats-the-difference-between-b-and-in-the-grep-command">What's the difference between <code>\b</code> and <code>\&lt;</code> in the <code>grep</code> command?</a> (unix.stackexchange)</p>
+</li>
+<li>
+<a href="https://thenewstack.io/tutorial-find-strings-in-text-files-using-grep-with-regular-expressions/">Tutorial: Find Strings in Text Files Using Grep with Regular Expressions</a> (Matt Zand, thenewstack)</li>
+<li>
+<a href="https://www.cyberciti.biz/faq/grep-regular-expressions/">Regular Expressions In grep examples</a> (cyberciti.biz)</li>
+<li>
+<a href="https://www.rexegg.com/regex-quickstart.html">regex quickstart</a> (Rex Egg)</li>
+</ul>
+<h2 id="Sample-text-files">
+<a class="anchor" href="#Sample-text-files" aria-hidden="true"><span class="octicon octicon-link"></span></a>Sample text files<a class="anchor-link" href="#Sample-text-files"> </a>
+</h2>
+<p>The sample text files used in this post are directly available from the OS:</p>
+<ul>
+<li>calendar files in <code>/usr/share/calendar</code>
+</li>
+<li>dictionary words in <code>/usr/share/dict/words</code>
+</li>
+<li>meaning of flowers in <code>/usr/share/misc/flowers</code>
+</li>
+<li>birth token <code>/usr/share/misc/birthtoken</code>
+</li>
+<li>the ascii table <code>/usr/share/misc/ascii</code>
+</li>
+<li>units <code>/usr/share/misc/units.lib</code>
+</li>
+</ul>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="System-information">
+<a class="anchor" href="#System-information" aria-hidden="true"><span class="octicon octicon-link"></span></a>System information<a class="anchor-link" href="#System-information"> </a>
+</h1>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Version of <code>grep</code> used in this page:</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">!</span>grep -V
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>grep (BSD grep) 2.5.1-FreeBSD
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Operating system used in this page:</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">!</span>uname -v
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Darwin Kernel Version 19.4.0: Wed Mar  4 22:28:40 PST 2020; root:xnu-6153.101.6~15/RELEASE_X86_64
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Basic-usage">
+<a class="anchor" href="#Basic-usage" aria-hidden="true"><span class="octicon octicon-link"></span></a>Basic usage<a class="anchor-link" href="#Basic-usage"> </a>
+</h1>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Match-a-string">
+<a class="anchor" href="#Match-a-string" aria-hidden="true"><span class="octicon octicon-link"></span></a>Match a string<a class="anchor-link" href="#Match-a-string"> </a>
+</h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>In a single file:</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">!</span>grep <span class="s2">"Alan"</span> /usr/share/calendar/calendar.birthday
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>06/07	Alan Mathison Turing died, 1954
+06/23	Alan Mathison Turing born, 1912
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>In multiple files:</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">!</span>grep <span class="s2">"Alan"</span> /usr/share/calendar/calendar.*
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>/usr/share/calendar/calendar.birthday:06/07	Alan Mathison Turing died, 1954
+/usr/share/calendar/calendar.birthday:06/23	Alan Mathison Turing born, 1912
+/usr/share/calendar/calendar.computer:06/07	Alan Mathison Turing died, 1954
+/usr/share/calendar/calendar.computer:06/23	Alan Mathison Turing born, 1912
+/usr/share/calendar/calendar.freebsd:06/06	Alan Eldridge &lt;alane@FreeBSD.org&gt; died in Denver, Colorado, 2003
+/usr/share/calendar/calendar.history:06/28	Supreme Court decides in favor of Alan Bakke, 1978
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Insert-line-number:--n">
+<a class="anchor" href="#Insert-line-number:--n" aria-hidden="true"><span class="octicon octicon-link"></span></a>Insert line number: <code>-n</code><a class="anchor-link" href="#Insert-line-number:--n"> </a>
+</h2>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">!</span>grep -n Alan /usr/share/calendar/calendar.birthday
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Highlight-match:---color">
+<a class="anchor" href="#Highlight-match:---color" aria-hidden="true"><span class="octicon octicon-link"></span></a>Highlight match: <code>--color</code><a class="anchor-link" href="#Highlight-match:---color"> </a>
+</h2>
+<p></p>
+<div class="flash">
+    <svg class="octicon octicon-info" viewbox="0 0 14 16" version="1.1" width="14" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M6.3 5.69a.942.942 0 01-.28-.7c0-.28.09-.52.28-.7.19-.18.42-.28.7-.28.28 0 .52.09.7.28.18.19.28.42.28.7 0 .28-.09.52-.28.7a1 1 0 01-.7.3c-.28 0-.52-.11-.7-.3zM8 7.99c-.02-.25-.11-.48-.31-.69-.2-.19-.42-.3-.69-.31H6c-.27.02-.48.13-.69.31-.2.2-.3.44-.31.69h1v3c.02.27.11.5.31.69.2.2.42.31.69.31h1c.27 0 .48-.11.69-.31.2-.19.3-.42.31-.69H8V7.98v.01zM7 2.3c-3.14 0-5.7 2.54-5.7 5.68 0 3.14 2.56 5.7 5.7 5.7s5.7-2.55 5.7-5.7c0-3.15-2.56-5.69-5.7-5.69v.01zM7 .98c3.86 0 7 3.14 7 7s-3.14 7-7 7-7-3.12-7-7 3.14-7 7-7z"></path></svg>
+    <strong>Note: </strong>This is not currently visible once the <code>jupyter notebook</code> has been converted to <code>html</code>.
+</div>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">!</span>grep --color <span class="s2">"Alan"</span> /usr/share/calendar/calendar.birthday
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>06/07	<span class="ansi-red-intense-fg ansi-bold">Alan</span> Mathison Turing died, 1954
+06/23	<span class="ansi-red-intense-fg ansi-bold">Alan</span> Mathison Turing born, 1912
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Match-count:--c">
+<a class="anchor" href="#Match-count:--c" aria-hidden="true"><span class="octicon octicon-link"></span></a>Match count: <code>-c</code><a class="anchor-link" href="#Match-count:--c"> </a>
+</h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>In a single file:</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">!</span>grep -c <span class="s2">"Alan"</span> /usr/share/calendar/calendar.birthday
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>2
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>In multiple files:</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">!</span>grep -c <span class="s2">"Alan"</span> /usr/share/calendar/calendar.<span class="o">[</span>bc<span class="o">]</span>*
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>/usr/share/calendar/calendar.birthday:2
+/usr/share/calendar/calendar.christian:0
+/usr/share/calendar/calendar.computer:2
+/usr/share/calendar/calendar.croatian:0
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Case-insensitive-match">
+<a class="anchor" href="#Case-insensitive-match" aria-hidden="true"><span class="octicon octicon-link"></span></a>Case-insensitive match<a class="anchor-link" href="#Case-insensitive-match"> </a>
+</h2>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">!</span>grep --color -i <span class="s2">"unix"</span> /usr/share/calendar/calendar.computer
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>01/01	The Epoch (Time 0 for <span class="ansi-red-intense-fg ansi-bold">UNIX</span> systems, Midnight GMT, 1970)
+05/19	<span class="ansi-red-intense-fg ansi-bold">UNIX</span> is 10000 days old, 1997
+08/14	First <span class="ansi-red-intense-fg ansi-bold">Unix</span>-based mallet created, 1954
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="File-names-with-a-match:--l">
+<a class="anchor" href="#File-names-with-a-match:--l" aria-hidden="true"><span class="octicon octicon-link"></span></a>File names with a match: <code>-l</code><a class="anchor-link" href="#File-names-with-a-match:--l"> </a>
+</h2>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">!</span>grep -l <span class="s2">"Alan"</span> /usr/share/calendar/calendar.*
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>/usr/share/calendar/calendar.birthday
+/usr/share/calendar/calendar.computer
+/usr/share/calendar/calendar.freebsd
+/usr/share/calendar/calendar.history
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Position-of-match-in-file:--b">
+<a class="anchor" href="#Position-of-match-in-file:--b" aria-hidden="true"><span class="octicon octicon-link"></span></a>Position of match in file: <code>-b</code><a class="anchor-link" href="#Position-of-match-in-file:--b"> </a>
+</h2>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">!</span>grep -b <span class="s2">"Alan"</span> /usr/share/calendar/calendar.birthday
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>6906:06/07	Alan Mathison Turing died, 1954
+7346:06/23	Alan Mathison Turing born, 1912
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Include/exclude-files:---include,---exclude">
+<a class="anchor" href="#Include/exclude-files:---include,---exclude" aria-hidden="true"><span class="octicon octicon-link"></span></a>Include/exclude files: <code>--include</code>, <code>--exclude</code><a class="anchor-link" href="#Include/exclude-files:---include,---exclude"> </a>
+</h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Exclude file in search:</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">!</span>grep <span class="s2">"Alan"</span> --exclude /usr/share/calendar/calendar.computer /usr/share/calendar/calendar.*
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>/usr/share/calendar/calendar.birthday:06/07	Alan Mathison Turing died, 1954
+/usr/share/calendar/calendar.birthday:06/23	Alan Mathison Turing born, 1912
+/usr/share/calendar/calendar.freebsd:06/06	Alan Eldridge &lt;alane@FreeBSD.org&gt; died in Denver, Colorado, 2003
+/usr/share/calendar/calendar.history:06/28	Supreme Court decides in favor of Alan Bakke, 1978
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Include files:</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">!</span>grep <span class="s2">"Alan"</span> --include <span class="s2">"calendar.*"</span> /usr/share/calendar/*
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>/usr/share/calendar/calendar.birthday:06/07	Alan Mathison Turing died, 1954
+/usr/share/calendar/calendar.birthday:06/23	Alan Mathison Turing born, 1912
+/usr/share/calendar/calendar.computer:06/07	Alan Mathison Turing died, 1954
+/usr/share/calendar/calendar.computer:06/23	Alan Mathison Turing born, 1912
+/usr/share/calendar/calendar.freebsd:06/06	Alan Eldridge &lt;alane@FreeBSD.org&gt; died in Denver, Colorado, 2003
+/usr/share/calendar/calendar.history:06/28	Supreme Court decides in favor of Alan Bakke, 1978
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Whole-word-match:--w">
+<a class="anchor" href="#Whole-word-match:--w" aria-hidden="true"><span class="octicon octicon-link"></span></a>Whole word match: <code>-w</code><a class="anchor-link" href="#Whole-word-match:--w"> </a>
+</h2>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">!</span>grep -w  -n --color <span class="s2">"Francis"</span> /usr/share/calendar/calendar.birthday
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>31:01/22	Sir <span class="ansi-red-intense-fg ansi-bold">Francis</span> Bacon born, 1561
+273:11/20	Robert <span class="ansi-red-intense-fg ansi-bold">Francis</span> Kennedy (RFK) born in Boston, Massachusetts, 1925
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>... as opposed to string matches:</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">!</span>grep -n --color <span class="s2">"Francis"</span> /usr/share/calendar/calendar.birthday
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>31:01/22	Sir <span class="ansi-red-intense-fg ansi-bold">Francis</span> Bacon born, 1561
+104:03/30	<span class="ansi-red-intense-fg ansi-bold">Francis</span>co Jose de Goya born, 1746
+129:04/29	William Randolph Hearst born in San <span class="ansi-red-intense-fg ansi-bold">Francis</span>co, 1863
+151:05/30	Mel (Melvin Jerome) Blanc born in San <span class="ansi-red-intense-fg ansi-bold">Francis</span>co, 1908
+273:11/20	Robert <span class="ansi-red-intense-fg ansi-bold">Francis</span> Kennedy (RFK) born in Boston, Massachusetts, 1925
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Lines-before/after/around-match">
+<a class="anchor" href="#Lines-before/after/around-match" aria-hidden="true"><span class="octicon octicon-link"></span></a>Lines before/after/around match<a class="anchor-link" href="#Lines-before/after/around-match"> </a>
+</h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Show two lines before each match:</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">!</span>grep -n --color -B2 <span class="s2">"uncomputed"</span> /usr/share/dict/words
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>212942-uncomputableness
+212943-uncomputably
+212944:<span class="ansi-red-intense-fg ansi-bold">uncomputed</span>
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Show three lines after each match:</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">!</span>grep -n --color -A3 <span class="s2">"uncomputed"</span> /usr/share/dict/words
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>212944:<span class="ansi-red-intense-fg ansi-bold">uncomputed</span>
+212945-uncomraded
+212946-unconcatenated
+212947-unconcatenating
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Show two lines before and three lines after each match:</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">!</span>grep -n --color -B2 -A3 <span class="s2">"uncomputed"</span> /usr/share/dict/words
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>212942-uncomputableness
+212943-uncomputably
+212944:<span class="ansi-red-intense-fg ansi-bold">uncomputed</span>
+212945-uncomraded
+212946-unconcatenated
+212947-unconcatenating
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Show two lines around match:</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">!</span>grep -n --color -C2 <span class="s2">"uncomputed"</span> /usr/share/dict/words
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>212942-uncomputableness
+212943-uncomputably
+212944:<span class="ansi-red-intense-fg ansi-bold">uncomputed</span>
+212945-uncomraded
+212946-unconcatenated
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Regular-expressions">
+<a class="anchor" href="#Regular-expressions" aria-hidden="true"><span class="octicon octicon-link"></span></a>Regular expressions<a class="anchor-link" href="#Regular-expressions"> </a>
+</h1>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<ul>
+<li>
+<code>?</code> The preceding item is optional and matched at most once</li>
+<li>
+<code>*</code> The preceding item will be matched zero or more times</li>
+<li>
+<code>+</code> The preceding item will be matched one or more times</li>
+<li>
+<code>{n}</code> The preceding item is matched exactly n times</li>
+<li>
+<code>{n,}</code> The preceding item is matched n or more times</li>
+<li>
+<code>{,m}</code> The preceding item is matched at most m times</li>
+<li>
+<p><code>{n,m}</code> The preceding item is matched at least n times, but not more than m times</p>
+</li>
+<li>
+<p><code>\&lt;</code> matches the beginning of a word</p>
+</li>
+<li>
+<code>\&gt;</code> matches the end of a word</li>
+<li>
+<code>\b</code> matches both boundaries if at the end or at the beginning</li>
+</ul>
+<p>Classes of characters:</p>
+<ul>
+<li>
+<code>[[:alnum:]]</code>: Alphanumeric characters.</li>
+<li>
+<code>[[:alpha:]]</code>: Alphabetic characters</li>
+<li>
+<code>[[:blank:]]</code>: Blank characters: space and tab.</li>
+<li>
+<code>[[:digit:]]</code>: Digits: ‘0 1 2 3 4 5 6 7 8 9’.</li>
+<li>
+<code>[[:lower:]]</code>: Lower-case letters: ‘a b c d e f g h i j k l m n o p q r s t u v w x y z’.</li>
+<li>
+<code>[[:space:]]</code>: Space characters: tab, newline, vertical tab, form feed, carriage return, and space.</li>
+<li>
+<code>[[:upper:]]</code>: Upper-case letters: ‘A B C D E F G H I J K L M N O P Q R S T U V W X Y Z’.</li>
+</ul>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Word-anchors:-^,-$,-\&gt;,-\&gt;,-\b">
+<a class="anchor" href="#Word-anchors:-%5E,-%24,-%5C&gt;,-%5C&gt;,-%5Cb" aria-hidden="true"><span class="octicon octicon-link"></span></a>Word anchors: <code>^</code>, <code>$</code>, <code>\&gt;</code>, <code>\&gt;</code>, <code>\b</code><a class="anchor-link" href="#Word-anchors:-%5E,-%24,-%5C&gt;,-%5C&gt;,-%5Cb"> </a>
+</h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Lines beginning with pattern:</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">!</span>grep -n --color <span class="s2">"^compute"</span> /usr/share/dict/words
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>40564:<span class="ansi-red-intense-fg ansi-bold">compute</span>
+40565:<span class="ansi-red-intense-fg ansi-bold">compute</span>r
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Lines ending with pattern:</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">!</span>grep -n --color <span class="s2">"compute</span>$<span class="s2">"</span> /usr/share/dict/words 
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>40564:<span class="ansi-red-intense-fg ansi-bold">compute</span>
+117000:mis<span class="ansi-red-intense-fg ansi-bold">compute</span>
+164643:re<span class="ansi-red-intense-fg ansi-bold">compute</span>
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Beginning a word:</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">!</span>grep -n --color <span class="s1">'\&lt;compute'</span> /usr/share/dict/words
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>40564:<span class="ansi-red-intense-fg ansi-bold">compute</span>
+40565:<span class="ansi-red-intense-fg ansi-bold">compute</span>r
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Ending a word:</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">!</span>grep -n --color <span class="s1">'compute\&gt;'</span> /usr/share/dict/words
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>40564:<span class="ansi-red-intense-fg ansi-bold">compute</span>
+117000:mis<span class="ansi-red-intense-fg ansi-bold">compute</span>
+164643:re<span class="ansi-red-intense-fg ansi-bold">compute</span>
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Words of specified length:</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">!</span>grep -n --color <span class="s1">'\&lt;.\{24\}\&gt;'</span> /usr/share/dict/words
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>72632:<span class="ansi-red-intense-fg ansi-bold">formaldehydesulphoxylate</span>
+140339:<span class="ansi-red-intense-fg ansi-bold">pathologicopsychological</span>
+175108:<span class="ansi-red-intense-fg ansi-bold">scientificophilosophical</span>
+200796:<span class="ansi-red-intense-fg ansi-bold">tetraiodophenolphthalein</span>
+203042:<span class="ansi-red-intense-fg ansi-bold">thyroparathyroidectomize</span>
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Words with fixed length and speficied starting and ending characters:</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">!</span>grep -n --color <span class="s1">'\&lt;y...h\&gt;'</span> /usr/share/dict/words
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>234368:<span class="ansi-red-intense-fg ansi-bold">yamph</span>
+234449:<span class="ansi-red-intense-fg ansi-bold">yarth</span>
+234632:<span class="ansi-red-intense-fg ansi-bold">yerth</span>
+234702:<span class="ansi-red-intense-fg ansi-bold">yirth</span>
+234824:<span class="ansi-red-intense-fg ansi-bold">youth</span>
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Words with specified first and last characters, of any length:</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">!</span>grep -n<span class="s1">'\&lt;q.*x\&gt;'</span> /usr/share/dict/words
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>161224:quadratrix
+161400:quadruplex
+161963:quincunx
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Boolean-OR">
+<a class="anchor" href="#Boolean-OR" aria-hidden="true"><span class="octicon octicon-link"></span></a>Boolean <code>OR</code><a class="anchor-link" href="#Boolean-OR"> </a>
+</h2>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">!</span>grep -n --color -E <span class="s1">'computer|hardware'</span> /usr/share/dict/words
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>40565:<span class="ansi-red-intense-fg ansi-bold">computer</span>
+82436:<span class="ansi-red-intense-fg ansi-bold">hardware</span>
+82437:<span class="ansi-red-intense-fg ansi-bold">hardware</span>man
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">!</span>grep -n --color -E <span class="s1">'Rose|Violet'</span> /usr/share/misc/birthtoken
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>4:February:Amethyst:<span class="ansi-red-intense-fg ansi-bold">Violet</span>
+8:June:Pearl:<span class="ansi-red-intense-fg ansi-bold">Rose</span>
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Character-classes">
+<a class="anchor" href="#Character-classes" aria-hidden="true"><span class="octicon octicon-link"></span></a>Character classes<a class="anchor-link" href="#Character-classes"> </a>
+</h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Match whole words <code>gray</code> or <code>grey</code>:</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">!</span>grep -n --color <span class="s1">'\&lt;gr[ae]y\&gt;'</span> /usr/share/dict/words
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>79755:<span class="ansi-red-intense-fg ansi-bold">gray</span>
+79976:<span class="ansi-red-intense-fg ansi-bold">grey</span>
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Match words of two characters, first an upper case, the second lower case:</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">!</span>grep --color <span class="s1">'\&lt;[[:upper:]][[:lower:]]\&gt;'</span> /usr/share/misc/birthtoken 
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>May:Emerald:Lily <span class="ansi-red-intense-fg ansi-bold">Of</span> The Valley
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Match numbers of any length:</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">!</span>grep -n --color -E <span class="s1">'\d+'</span> /usr/share/calendar/calendar.australia
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>4: * $FreeBSD: src/usr.bin/calendar/calendars/calendar.australia,v <span class="ansi-red-intense-fg ansi-bold">1</span>.<span class="ansi-red-intense-fg ansi-bold">7</span> <span class="ansi-red-intense-fg ansi-bold">2006</span>/<span class="ansi-red-intense-fg ansi-bold">10</span>/<span class="ansi-red-intense-fg ansi-bold">06</span> <span class="ansi-red-intense-fg ansi-bold">23</span>:<span class="ansi-red-intense-fg ansi-bold">20</span>:<span class="ansi-red-intense-fg ansi-bold">01</span> flz Exp $
+10:LANG=en_AU.ISO<span class="ansi-red-intense-fg ansi-bold">8859</span>-<span class="ansi-red-intense-fg ansi-bold">1</span>
+13:Jan <span class="ansi-red-intense-fg ansi-bold">26</span>	Australia Day
+15:Apr <span class="ansi-red-intense-fg ansi-bold">25</span>	Anzac Day
+20:Mar <span class="ansi-red-intense-fg ansi-bold">18</span>	Canberra Day (ACT)
+21:<span class="ansi-red-intense-fg ansi-bold">8</span>/MonFirst	Bank Holiday (ACT, NSW)
+22:<span class="ansi-red-intense-fg ansi-bold">10</span>/MonFirst	Labour Day (ACT, NSW, SA)
+25:<span class="ansi-red-intense-fg ansi-bold">3</span>/MonSecond	Labour Day (Vic)
+29:Feb <span class="ansi-red-intense-fg ansi-bold">11</span>	Regatta Day (Tas)
+30:Feb <span class="ansi-red-intense-fg ansi-bold">27</span>	Launceston Cup (Tas)
+31:Mar <span class="ansi-red-intense-fg ansi-bold">11</span>	Eight Hours Day (Tas)
+33:Oct <span class="ansi-red-intense-fg ansi-bold">10</span>	Launceston Show Day (Tas)
+34:Oct <span class="ansi-red-intense-fg ansi-bold">24</span>	Hobart Show Day (Tas)
+35:Nov <span class="ansi-red-intense-fg ansi-bold">04</span>	Recreation Day (N Tas)
+39:Dec <span class="ansi-red-intense-fg ansi-bold">26</span>	Proclamation Day holiday (SA)
+42:<span class="ansi-red-intense-fg ansi-bold">3</span>/MonFirst	Labour Day (WA)
+43:<span class="ansi-red-intense-fg ansi-bold">6</span>/MonFirst	Foundation Day (WA)
+44:Sep <span class="ansi-red-intense-fg ansi-bold">30</span>	Queen's Birthday (WA)
+47:<span class="ansi-red-intense-fg ansi-bold">5</span>/MonFirst	May Day (NT)
+48:<span class="ansi-red-intense-fg ansi-bold">7</span>/FriFirst	Alice Springs Show Day (NT)
+49:<span class="ansi-red-intense-fg ansi-bold">7</span>/FriSecond	Tennant Creek Show Day (NT)
+50:<span class="ansi-red-intense-fg ansi-bold">7</span>/FriThird	Katherine Show Day (NT)
+51:<span class="ansi-red-intense-fg ansi-bold">7</span>/FriLast	Darwin Show Day (NT)
+52:<span class="ansi-red-intense-fg ansi-bold">8</span>/MonFirst	Picnic Day (NT)
+55:<span class="ansi-red-intense-fg ansi-bold">5</span>/MonFirst	Labour Day (Qld)
+56:Aug <span class="ansi-red-intense-fg ansi-bold">14</span>	RNA Show Day (Brisbane metro)
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="TODO">
+<a class="anchor" href="#TODO" aria-hidden="true"><span class="octicon octicon-link"></span></a>TODO<a class="anchor-link" href="#TODO"> </a>
+</h1>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<ul>
+<li><code>v</code></li>
+<li>search directory recursively</li>
+</ul>
+
+</div>
+</div>
+</div>
+</div>
+
+
+
+  </div><!-- from https://github.com/utterance/utterances -->
+<script src="https://utteranc.es/client.js"
+        repo="antoinechoffrut/com-net-sec"
+        issue-term="title"
+        label="blogpost-comment"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+</script><a class="u-url" href="/com-net-sec/cheatsheet/2020/05/05/grep-cheatsheet.html" hidden></a>
+</article>
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/com-net-sec/"></data>
+
+  <div class="wrapper">
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col">
+        <p class="feed-subscribe">
+          <a href="/com-net-sec/feed.xml">
+            <svg class="svg-icon orange">
+              <use xlink:href="/com-net-sec/assets/minima-social-icons.svg#rss"></use>
+            </svg><span>Subscribe</span>
+          </a>
+        </p>
+      </div>
+      <div class="footer-col">
+        <p>Ressources on computers, networks, and security</p>
+      </div>
+    </div>
+
+    <div class="social-links"><ul class="social-media-list"><li><a rel="me" href="https://github.com/antoinechoffrut" title="antoinechoffrut"><svg class="svg-icon grey"><use xlink:href="/com-net-sec/assets/minima-social-icons.svg#github"></use></svg></a></li></ul>
+</div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>
