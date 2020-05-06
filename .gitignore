@@ -8,7 +8,7 @@ _site
 vendor
 _notebooks/.ipynb_checkpoints
 .DS_Store
-
+.python-version
 
 # Local Netlify folder
 .netlify
@@ -16,10 +16,13 @@ _notebooks/.ipynb_checkpoints
 __pycache__
 
 # Exclude _all_ jupyter notebooks by default...
-
+_notebooks/*
 
 # ... but explicitly list _wanted_ jupyter notebooks
+!2020-05-05-grep-cheatsheet.ipynb
+
 
 # Exclude _all_ markdown pages by default...
+_posts/*.*
 
 # ... but explicitly list _wanted_ markdown pages
