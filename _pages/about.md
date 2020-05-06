@@ -4,10 +4,13 @@ title: About Me
 permalink: /about/
 ---
 
-This is where you put the contents of your *About* page. Like all your pages, it's in [Markdown](https://guides.github.com/features/mastering-markdown/) format.
+I am a mathematician by training, with about a decade of research
+experience in academia, where I specialized in the analysis of partial
+differential equations.
 
-This website is powered by **[fastpages](https://github.com/fastai/fastpages)** [^1].
-
-
-
-[^1]:a blogging platform that natively supports Jupyter notebooks in addition to other formats.
+I am interested in appyling machine learning techniques to computer
+system security.  This site focuses on computers, networking, and
+security, while ([fastai
+companion](https://antoinechoffrut.github.io/fastai-companion/)) deals
+with machine learning in general and neural nets in particular, with
+the PyTorch and fastai libraries.

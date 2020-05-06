@@ -7,7 +7,19 @@ _site
 .jekyll-metadata
 vendor
 _notebooks/.ipynb_checkpoints
+.DS_Store
+
+
 # Local Netlify folder
 .netlify
 .tweet-cache
 __pycache__
+
+# Exclude _all_ jupyter notebooks by default...
+
+
+# ... but explicitly list _wanted_ jupyter notebooks
+
+# Exclude _all_ markdown pages by default...
+
+# ... but explicitly list _wanted_ markdown pages
