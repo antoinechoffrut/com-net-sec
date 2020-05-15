@@ -1,8 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
-<loc>https://antoinechoffrut.github.io/com-net-sec/cheatsheet/2020/05/05/grep-cheatsheet.html</loc>
+<loc>https://antoinechoffrut.github.io/com-net-sec/cheatsheet/cli/macos/2020/05/05/grep-cheatsheet.html</loc>
 <lastmod>2020-05-05T00:00:00-05:00</lastmod>
+</url>
+<url>
+<loc>https://antoinechoffrut.github.io/com-net-sec/cheatsheet/cli/macos/2020/05/15/find-cheatsheet.html</loc>
+<lastmod>2020-05-15T00:00:00-05:00</lastmod>
 </url>
 <url>
 <loc>https://antoinechoffrut.github.io/com-net-sec/about/</loc>

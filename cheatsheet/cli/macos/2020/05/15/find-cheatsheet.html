@@ -1,0 +1,1548 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.6.1 -->
+<title>find cheatsheet | On computers, networks, and security</title>
+<meta name="generator" content="Jekyll v4.0.0" />
+<meta property="og:title" content="find cheatsheet" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="The find command searches files by name, size, type, and other criteria, down a directory tree" />
+<meta property="og:description" content="The find command searches files by name, size, type, and other criteria, down a directory tree" />
+<link rel="canonical" href="https://antoinechoffrut.github.io/com-net-sec/cheatsheet/cli/macos/2020/05/15/find-cheatsheet.html" />
+<meta property="og:url" content="https://antoinechoffrut.github.io/com-net-sec/cheatsheet/cli/macos/2020/05/15/find-cheatsheet.html" />
+<meta property="og:site_name" content="On computers, networks, and security" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2020-05-15T00:00:00-05:00" />
+<script type="application/ld+json">
+{"description":"The find command searches files by name, size, type, and other criteria, down a directory tree","mainEntityOfPage":{"@type":"WebPage","@id":"https://antoinechoffrut.github.io/com-net-sec/cheatsheet/cli/macos/2020/05/15/find-cheatsheet.html"},"@type":"BlogPosting","url":"https://antoinechoffrut.github.io/com-net-sec/cheatsheet/cli/macos/2020/05/15/find-cheatsheet.html","headline":"find cheatsheet","dateModified":"2020-05-15T00:00:00-05:00","datePublished":"2020-05-15T00:00:00-05:00","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/com-net-sec/assets/css/style.css"><link type="application/atom+xml" rel="alternate" href="https://antoinechoffrut.github.io/com-net-sec/feed.xml" title="On computers, networks, and security" /><link rel="shortcut icon" type="image/x-icon" href="/com-net-sec/images/favicon.ico"><!-- Begin Jekyll SEO tag v2.6.1 -->
+<title>find cheatsheet | On computers, networks, and security</title>
+<meta name="generator" content="Jekyll v4.0.0" />
+<meta property="og:title" content="find cheatsheet" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="The find command searches files by name, size, type, and other criteria, down a directory tree" />
+<meta property="og:description" content="The find command searches files by name, size, type, and other criteria, down a directory tree" />
+<link rel="canonical" href="https://antoinechoffrut.github.io/com-net-sec/cheatsheet/cli/macos/2020/05/15/find-cheatsheet.html" />
+<meta property="og:url" content="https://antoinechoffrut.github.io/com-net-sec/cheatsheet/cli/macos/2020/05/15/find-cheatsheet.html" />
+<meta property="og:site_name" content="On computers, networks, and security" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2020-05-15T00:00:00-05:00" />
+<script type="application/ld+json">
+{"description":"The find command searches files by name, size, type, and other criteria, down a directory tree","mainEntityOfPage":{"@type":"WebPage","@id":"https://antoinechoffrut.github.io/com-net-sec/cheatsheet/cli/macos/2020/05/15/find-cheatsheet.html"},"@type":"BlogPosting","url":"https://antoinechoffrut.github.io/com-net-sec/cheatsheet/cli/macos/2020/05/15/find-cheatsheet.html","headline":"find cheatsheet","dateModified":"2020-05-15T00:00:00-05:00","datePublished":"2020-05-15T00:00:00-05:00","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+<link href="https://unpkg.com/@primer/css/dist/primer.css" rel="stylesheet" />
+<link rel="stylesheet" href="//use.fontawesome.com/releases/v5.0.7/css/all.css"><link type="application/atom+xml" rel="alternate" href="https://antoinechoffrut.github.io/com-net-sec/feed.xml" title="On computers, networks, and security" />
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js"></script>
+<script type="text/javascript">
+require.config({
+  paths: {
+    jquery: 'https://code.jquery.com/jquery-3.5.0.min',
+    plotly: 'https://cdn.plot.ly/plotly-latest.min'
+  },
+
+  shim: {
+    plotly: {
+      deps: ['jquery'],
+      exports: 'plotly'
+    }
+  }
+});
+</script>
+
+<script>
+function wrap_img(fn) {
+    if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
+        var elements = document.querySelectorAll(".post img");
+        Array.prototype.forEach.call(elements, function(el, i) {
+            if (el.getAttribute("title") && (el.className != "emoji")) {
+                const caption = document.createElement('figcaption');
+                var node = document.createTextNode(el.getAttribute("title"));
+                caption.appendChild(node);
+                const wrapper = document.createElement('figure');
+                wrapper.className = 'image';
+                el.parentNode.insertBefore(wrapper, el);
+                el.parentNode.removeChild(el);
+                wrapper.appendChild(el);
+                wrapper.appendChild(caption);
+            }
+        });
+    } else { document.addEventListener('DOMContentLoaded', fn); }
+}
+window.onload = wrap_img;
+</script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function(){
+    // add link icon to anchor tags
+    var elem = document.querySelectorAll(".anchor-link")
+    elem.forEach(e => (e.innerHTML = '<i class="fas fa-link fa-xs"></i>'));
+    });
+</script>
+</head><body><header class="site-header">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/com-net-sec/">On computers, networks, and security</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/com-net-sec/about/">About Me</a><a class="page-link" href="/com-net-sec/search/">Search</a><a class="page-link" href="/com-net-sec/categories/">Tags</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">find cheatsheet</h1><p class="page-description">The find command searches files by name, size, type, and other criteria,  down a directory tree</p><p class="post-meta post-meta-title"><time class="dt-published" datetime="2020-05-15T00:00:00-05:00" itemprop="datePublished">
+        May 15, 2020
+      </time>
+       • <span class="read-time" title="Estimated read time">
+    
+    
+      7 min read
+    
+</span></p>
+
+    
+      <p class="category-tags"><i class="fas fa-tags category-tags-icon"></i></i> 
+      
+        <a class="category-tags-link" href="/com-net-sec/categories/#cheatsheet">cheatsheet</a>
+        &nbsp;
+      
+        <a class="category-tags-link" href="/com-net-sec/categories/#cli">cli</a>
+        &nbsp;
+      
+        <a class="category-tags-link" href="/com-net-sec/categories/#macos">macos</a>
+        
+      
+      </p>
+    
+
+    
+      
+        <div class="pb-5 d-flex flex-wrap flex-justify-end">
+          <div class="px-2">
+
+    <a href="https://github.com/antoinechoffrut/com-net-sec/tree/master/_notebooks/2020-05-15-find-cheatsheet.ipynb" role="button" target="_blank">
+<img class="notebook-badge-image" src="/com-net-sec/assets/badges/github.svg" alt="View On GitHub">
+    </a>
+</div>
+
+          <div class="px-2">
+    <a href="https://mybinder.org/v2/gh/antoinechoffrut/com-net-sec/master?filepath=_notebooks%2F2020-05-15-find-cheatsheet.ipynb" target="_blank">
+        <img class="notebook-badge-image" src="/com-net-sec/assets/badges/binder.svg" alt="Open In Binder"/>
+    </a>
+</div>
+
+          <div class="px-2">
+    <a href="https://colab.research.google.com/github/antoinechoffrut/com-net-sec/blob/master/_notebooks/2020-05-15-find-cheatsheet.ipynb" target="_blank">
+        <img class="notebook-badge-image" src="/com-net-sec/assets/badges/colab.svg" alt="Open In Colab"/>
+    </a>
+</div>
+        </div>
+      </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <ul class="section-nav">
+<li class="toc-entry toc-h1"><a href="#Documentation">Documentation </a></li>
+<li class="toc-entry toc-h1"><a href="#List-all-files-in-directory-tree">List all files in directory tree </a>
+<ul>
+<li class="toc-entry toc-h2"><a href="#Restrict-depth-of-search:--maxdepth,--mindepth">Restrict depth of search: -maxdepth, -mindepth </a></li>
+</ul>
+</li>
+<li class="toc-entry toc-h1"><a href="#Find-by-name:--name">Find by name: -name </a>
+<ul>
+<li class="toc-entry toc-h2"><a href="#Find-by-type:--type">Find by type: -type </a></li>
+</ul>
+</li>
+<li class="toc-entry toc-h1"><a href="#Find-by-permissions:--perm">Find by permissions: -perm </a></li>
+<li class="toc-entry toc-h1"><a href="#Find-by-size:--size">Find by size: -size </a></li>
+<li class="toc-entry toc-h1"><a href="#Files-by-timestamps:--mtime,--mmin,--atime,-etc.">Files by timestamps: -mtime, -mmin, -atime, etc. </a></li>
+<li class="toc-entry toc-h1"><a href="#TODO">TODO </a></li>
+</ul><!--
+#################################################
+### THIS FILE WAS AUTOGENERATED! DO NOT EDIT! ###
+#################################################
+# file to edit: _notebooks/2020-05-15-find-cheatsheet.ipynb
+-->
+
+<div class="container" id="notebook-container">
+        
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p></p>
+<div class="flash flash-warn">
+    <svg class="octicon octicon-zap octicon octicon-zap" viewbox="0 0 10 16" version="1.1" width="10" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M10 7H6l3-7-9 9h4l-3 7 9-9z"></path></svg>
+    <strong>Important: </strong>The exclamation mark <code>!</code> and percent <code>%</code> symbols at the beginning of the lines should be ignored.  Indeed, this page is generated from a <code>jupyter notebook</code>, each cell of which runs <code>python</code> code.  In order to run <code>shell</code> commands (as "magic commands") one inserts a <code>!</code> or <code>%</code> at the beginning of the line.
+</div>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Documentation">
+<a class="anchor" href="#Documentation" aria-hidden="true"><span class="octicon octicon-link"></span></a>Documentation<a class="anchor-link" href="#Documentation"> </a>
+</h1>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>From the <a href="https://ss64.com/osx/find.html">man page</a> (ss64.com):</p>
+
+<pre><code>DESCRIPTION
+     The find utility recursively descends the directory tree for each path
+     listed, evaluating an expression (composed of the ``primaries'' and
+     ``operands'' listed below) in terms of each file in the tree.</code></pre>
+<p>Further references:</p>
+<ul>
+<li>
+<p><a href="https://ss64.com/bash/find.html">man page of the <code>find</code> command in linux</a> (ss64)</p>
+</li>
+<li>
+<p><a href="https://www.tecmint.com/35-practical-examples-of-linux-find-command/">35 pratical examples of linux find command</a> (tecmint)</p>
+</li>
+</ul>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="List-all-files-in-directory-tree">
+<a class="anchor" href="#List-all-files-in-directory-tree" aria-hidden="true"><span class="octicon octicon-link"></span></a>List all files in directory tree<a class="anchor-link" href="#List-all-files-in-directory-tree"> </a>
+</h1>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>List all files in specified directory and its subdirectories, recursively:</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">!</span>find /usr/share/dict
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>/usr/share/dict
+/usr/share/dict/words
+/usr/share/dict/web2
+/usr/share/dict/README
+/usr/share/dict/connectives
+/usr/share/dict/web2a
+/usr/share/dict/propernames
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Total number of results:</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">!</span>find /usr/share/dict <span class="p">|</span> wc -l
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>       7
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Restrict-depth-of-search:--maxdepth,--mindepth">
+<a class="anchor" href="#Restrict-depth-of-search:--maxdepth,--mindepth" aria-hidden="true"><span class="octicon octicon-link"></span></a>Restrict depth of search: <code>-maxdepth</code>, <code>-mindepth</code><a class="anchor-link" href="#Restrict-depth-of-search:--maxdepth,--mindepth"> </a>
+</h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Specify maximum depth down the directory tree:</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">!</span>find /usr/share/dict -maxdepth <span class="m">0</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>/usr/share/dict
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Specify minimum depth down the directory tree:</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">!</span>find /usr/share/dict -mindepth <span class="m">1</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>/usr/share/dict/words
+/usr/share/dict/web2
+/usr/share/dict/README
+/usr/share/dict/connectives
+/usr/share/dict/web2a
+/usr/share/dict/propernames
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Find-by-name:--name">
+<a class="anchor" href="#Find-by-name:--name" aria-hidden="true"><span class="octicon octicon-link"></span></a>Find by name: <code>-name</code><a class="anchor-link" href="#Find-by-name:--name"> </a>
+</h1>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Find a file by its name:</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">!</span>find /usr/share -name <span class="s2">"flowers"</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>/usr/share/misc/flowers
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Note that <code>find</code> descends the tree, so it will return all files with the same name present in all subdirectories:</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">!</span>find /usr/share -name <span class="s2">"calendar.holiday"</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>/usr/share/calendar/uk_UA.KOI8-U/calendar.holiday
+/usr/share/calendar/ru_RU.KOI8-R/calendar.holiday
+/usr/share/calendar/calendar.holiday
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Find all files (including directories) containing a string pattern:</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">!</span>find /usr/share -name <span class="s2">"*german*"</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>/usr/share/vim/vim81/lang/menu_german_germany.1252.vim
+/usr/share/calendar/calendar.german
+/usr/share/germantok
+/usr/share/germantok/german.index
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Find-by-type:--type">
+<a class="anchor" href="#Find-by-type:--type" aria-hidden="true"><span class="octicon octicon-link"></span></a>Find by type: <code>-type</code><a class="anchor-link" href="#Find-by-type:--type"> </a>
+</h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Possible file types:</p>
+<ul>
+<li>
+<code>b</code>: block special</li>
+<li>
+<code>c</code>: character special</li>
+<li>
+<code>d</code>: directory</li>
+<li>
+<code>f</code>: regular file</li>
+<li>
+<code>l</code>: symbolic link</li>
+<li>
+<code>p</code>: FIFO</li>
+<li>
+<code>s</code>: socket</li>
+</ul>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Some of theses are (regular) files, others are directories:</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">!</span>find /usr/share -name <span class="s2">"*german*"</span> <span class="p">|</span> xargs ls -ld <span class="p">|</span> sort 
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>-rw-r--r--  1 root  wheel      105  4 Sep  2019 /usr/share/vim/vim81/lang/menu_german_germany.1252.vim
+-rw-r--r--  1 root  wheel      261 24 Aug  2019 /usr/share/calendar/calendar.german
+-rw-r--r--  1 root  wheel  5018153 25 Aug  2019 /usr/share/germantok/german.index
+drwxr-xr-x  3 root  wheel       96 25 Aug  2019 /usr/share/germantok
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Find all <strong>regular</strong> files (in particular, excluding directories) containing a string pattern:</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">!</span>find /usr/share -name <span class="s2">"*german*"</span> -type f
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>/usr/share/vim/vim81/lang/menu_german_germany.1252.vim
+/usr/share/calendar/calendar.german
+/usr/share/germantok/german.index
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Find all <strong>directories</strong> (in particular excluding regular files) containing a string pattern:</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">!</span>find /usr/share -name <span class="s2">"*german*"</span> -type d
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>/usr/share/germantok
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Find-by-permissions:--perm">
+<a class="anchor" href="#Find-by-permissions:--perm" aria-hidden="true"><span class="octicon octicon-link"></span></a>Find by permissions: <code>-perm</code><a class="anchor-link" href="#Find-by-permissions:--perm"> </a>
+</h1>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>A directory containing files with different permissions:</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">!</span>find /usr/share/dict <span class="p">|</span> xargs ls -ld
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>drwxr-xr-x  8 root  wheel      256 19 Oct  2019 <span class="ansi-blue-intense-fg ansi-bold">/usr/share/dict</span>
+-r--r--r--  1 root  wheel     1311 24 Aug  2019 /usr/share/dict/README
+-r--r--r--  1 root  wheel      706 24 Aug  2019 /usr/share/dict/connectives
+-r--r--r--  1 root  wheel     8546 24 Aug  2019 /usr/share/dict/propernames
+-r--r--r--  1 root  wheel  2493109 24 Aug  2019 /usr/share/dict/web2
+-r--r--r--  1 root  wheel  1012731 24 Aug  2019 /usr/share/dict/web2a
+lrwxr-xr-x  1 root  wheel        4 19 Oct  2019 <span class="ansi-magenta-intense-fg ansi-bold">/usr/share/dict/words</span> -&gt; web2
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Find files with specified permission:</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">!</span>find /usr/share/dict -perm <span class="m">444</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>/usr/share/dict/web2
+/usr/share/dict/README
+/usr/share/dict/connectives
+/usr/share/dict/web2a
+/usr/share/dict/propernames
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Find files <strong>without</strong> specified permission:</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">!</span>find /usr/share/dict ! -perm <span class="m">444</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>/usr/share/dict
+/usr/share/dict/words
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Find files by symbolic mode: for user...</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">!</span>find /usr/share/dict -perm -u<span class="o">=</span>rwx
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>/usr/share/dict
+/usr/share/dict/words
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>... for group:</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">!</span>find /usr/share/dict -perm -g<span class="o">=</span>r-x
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>/usr/share/dict
+/usr/share/dict/words
+/usr/share/dict/web2
+/usr/share/dict/README
+/usr/share/dict/connectives
+/usr/share/dict/web2a
+/usr/share/dict/propernames
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>... for others:</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">!</span>find /usr/share/dict -perm -o<span class="o">=</span>r-x
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>/usr/share/dict
+/usr/share/dict/words
+/usr/share/dict/web2
+/usr/share/dict/README
+/usr/share/dict/connectives
+/usr/share/dict/web2a
+/usr/share/dict/propernames
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Find-by-size:--size">
+<a class="anchor" href="#Find-by-size:--size" aria-hidden="true"><span class="octicon octicon-link"></span></a>Find by size: <code>-size</code><a class="anchor-link" href="#Find-by-size:--size"> </a>
+</h1>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Available suffixes (from the <a href="https://ss64.com/bash/find.html">man page of the <em>linux</em> command</a>):</p>
+<ul>
+<li>
+<code>b</code>: 512-byte blocks (this is the default if no suffix is used)</li>
+<li>
+<code>c</code>: bytes</li>
+<li>
+<code>w</code>: two-byte words</li>
+<li>
+<code>k</code>: Kilobytes</li>
+<li>
+<code>M</code>: Megabytes</li>
+<li>
+<code>G</code>: Gigabytes</li>
+</ul>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Find files greater than a specified size:</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">!</span>find /usr/share/examples/DTTk/ -size +5k
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>/usr/share/examples/DTTk//iopending_example.txt
+/usr/share/examples/DTTk//iotop_example.txt
+/usr/share/examples/DTTk//seeksize_example.txt
+/usr/share/examples/DTTk//dapptrace_example.txt
+/usr/share/examples/DTTk//pridist_example.txt
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Find files smaller than a specified size:</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">!</span>find /usr/share/examples/DTTk -size -1k
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>/usr/share/examples/DTTk/kill_example.txt
+/usr/share/examples/DTTk/iofileb_example.txt
+/usr/share/examples/DTTk/creatbyproc_example.txt
+/usr/share/examples/DTTk/rwbypid_example.txt
+/usr/share/examples/DTTk/pidpersec_example.txt
+/usr/share/examples/DTTk/loads_example.txt
+/usr/share/examples/DTTk/sigdist_example.txt
+/usr/share/examples/DTTk/syscallbyproc_example.txt
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Find files of exactly (up to roundup) a specified size:</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">!</span>find /usr/share/examples/DTTk/ -size 358c
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>/usr/share/examples/DTTk//kill_example.txt
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p></p>
+<div class="flash">
+    <svg class="octicon octicon-info octicon octicon-info" viewbox="0 0 14 16" version="1.1" width="14" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M6.3 5.69a.942.942 0 01-.28-.7c0-.28.09-.52.28-.7.19-.18.42-.28.7-.28.28 0 .52.09.7.28.18.19.28.42.28.7 0 .28-.09.52-.28.7a1 1 0 01-.7.3c-.28 0-.52-.11-.7-.3zM8 7.99c-.02-.25-.11-.48-.31-.69-.2-.19-.42-.3-.69-.31H6c-.27.02-.48.13-.69.31-.2.2-.3.44-.31.69h1v3c.02.27.11.5.31.69.2.2.42.31.69.31h1c.27 0 .48-.11.69-.31.2-.19.3-.42.31-.69H8V7.98v.01zM7 2.3c-3.14 0-5.7 2.54-5.7 5.68 0 3.14 2.56 5.7 5.7 5.7s5.7-2.55 5.7-5.7c0-3.15-2.56-5.69-5.7-5.69v.01zM7 .98c3.86 0 7 3.14 7 7s-3.14 7-7 7-7-3.12-7-7 3.14-7 7-7z"></path></svg>
+    <strong>Note: </strong>The directory chosen abovec contains only files, listed below in increasing order of size:
+</div>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">!</span>ls -lSr /usr/share/examples/DTTk/
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>total 432
+-rw-r--r--  1 root  wheel    358 25 Aug  2019 kill_example.txt
+-rw-r--r--  1 root  wheel    557 25 Aug  2019 loads_example.txt
+-rw-r--r--  1 root  wheel    605 25 Aug  2019 creatbyproc_example.txt
+-rw-r--r--  1 root  wheel    622 25 Aug  2019 sigdist_example.txt
+-rw-r--r--  1 root  wheel    636 25 Aug  2019 rwbypid_example.txt
+-rw-r--r--  1 root  wheel    818 25 Aug  2019 iofileb_example.txt
+-rw-r--r--  1 root  wheel    827 25 Aug  2019 syscallbyproc_example.txt
+-rw-r--r--  1 root  wheel    955 25 Aug  2019 pidpersec_example.txt
+-rw-r--r--  1 root  wheel   1031 25 Aug  2019 pathopens_example.txt
+-rw-r--r--  1 root  wheel   1127 25 Aug  2019 setuids_example.txt
+-rw-r--r--  1 root  wheel   1159 25 Aug  2019 newproc_example.txt
+-rw-r--r--  1 root  wheel   1334 25 Aug  2019 syscallbysysc_example.txt
+-rw-r--r--  1 root  wheel   1436 25 Aug  2019 iofile_example.txt
+-rw-r--r--  1 root  wheel   1530 25 Aug  2019 rwbytype_example.txt
+-rw-r--r--  1 root  wheel   1536 25 Aug  2019 fddist_example.txt
+-rw-r--r--  1 root  wheel   1550 25 Aug  2019 filebyproc_example.txt
+-rw-r--r--  1 root  wheel   1647 25 Aug  2019 hotspot_example.txt
+-rw-r--r--  1 root  wheel   1830 25 Aug  2019 iosnoop_example.txt
+-rw-r--r--  1 root  wheel   2050 25 Aug  2019 sampleproc_example.txt
+-rw-r--r--  1 root  wheel   2139 25 Aug  2019 topsysproc_example.txt
+-rw-r--r--  1 root  wheel   2260 25 Aug  2019 iopattern_example.txt
+-rw-r--r--  1 root  wheel   2457 25 Aug  2019 topsyscall_example.txt
+-rw-r--r--  1 root  wheel   2518 25 Aug  2019 execsnoop_example.txt
+-rw-r--r--  1 root  wheel   2530 25 Aug  2019 dispqlen_example.txt
+-rw-r--r--  1 root  wheel   2987 25 Aug  2019 syscallbypid_example.txt
+-rw-r--r--  1 root  wheel   3239 25 Aug  2019 cpuwalk_example.txt
+-rw-r--r--  1 root  wheel   3315 25 Aug  2019 dappprof_example.txt
+-rw-r--r--  1 root  wheel   3629 25 Aug  2019 bitesize_example.txt
+-rw-r--r--  1 root  wheel   4135 25 Aug  2019 priclass_example.txt
+-rw-r--r--  1 root  wheel   4275 25 Aug  2019 errinfo_example.txt
+-rw-r--r--  1 root  wheel   4500 25 Aug  2019 lastwords_example.txt
+-rw-r--r--  1 root  wheel   4505 25 Aug  2019 dtruss_example.txt
+-rw-r--r--  1 root  wheel   4584 25 Aug  2019 procsystime_example.txt
+-rw-r--r--  1 root  wheel   4658 25 Aug  2019 opensnoop_example.txt
+-rw-r--r--  1 root  wheel   5074 25 Aug  2019 rwsnoop_example.txt
+-rw-r--r--  1 root  wheel   6108 25 Aug  2019 iopending_example.txt
+-rw-r--r--  1 root  wheel   6737 25 Aug  2019 iotop_example.txt
+-rw-r--r--  1 root  wheel   6984 25 Aug  2019 dapptrace_example.txt
+-rw-r--r--  1 root  wheel  10361 25 Aug  2019 seeksize_example.txt
+-rw-r--r--  1 root  wheel  10718 25 Aug  2019 pridist_example.txt
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Files-by-timestamps:--mtime,--mmin,--atime,-etc.">
+<a class="anchor" href="#Files-by-timestamps:--mtime,--mmin,--atime,-etc." aria-hidden="true"><span class="octicon octicon-link"></span></a>Files by timestamps: <code>-mtime</code>, <code>-mmin</code>, <code>-atime</code>, etc.<a class="anchor-link" href="#Files-by-timestamps:--mtime,--mmin,--atime,-etc."> </a>
+</h1>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Possible timestamps:</p>
+<ul>
+<li>creation/birth time;</li>
+<li>last access time;</li>
+<li>last modification time (content);</li>
+<li>last change time (permissions)</li>
+</ul>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Create files and manipulate creation, modification, and access times:</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">%</span><span class="k">cd</span> ~/.Trash
+<span class="o">!</span><span class="nb">echo</span> <span class="s2">"Creating old file..."</span>
+<span class="o">!</span>touch oldfile.txt
+<span class="o">!</span>touch -t <span class="m">202002011234</span> oldfile.txt
+<span class="o">!</span>stat -f <span class="s2">"Access (atime): %Sa%nModify (mtime): %Sm%nChange (ctime): %Sc%nBirth  (Btime): %SB"</span> oldfile.txt
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>/Users/antoine/.Trash
+Creating old file...
+Access (atime): Feb  1 12:34:00 2020
+Modify (mtime): Feb  1 12:34:00 2020
+Change (ctime): May 15 16:39:45 2020
+Birth  (Btime): Feb  1 12:34:00 2020
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">%</span><span class="k">cd</span> ~/.Trash
+<span class="o">!</span><span class="nb">echo</span> <span class="s2">"Creating new file..."</span>
+<span class="o">!</span>touch newfile.txt
+<span class="o">!</span>touch -t <span class="m">202005041234</span> newfile.txt
+<span class="o">!</span>stat -f <span class="s2">"Access (atime): %Sa%nModify (mtime): %Sm%nChange (ctime): %Sc%nBirth  (Btime): %SB"</span> newfile.txt
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>/Users/antoine/.Trash
+Creating new file...
+Access (atime): May  4 12:34:00 2020
+Modify (mtime): May  4 12:34:00 2020
+Change (ctime): May 15 16:39:46 2020
+Birth  (Btime): Feb  1 12:34:00 2020
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">%</span><span class="k">cd</span> ~/.Trash
+<span class="o">!</span><span class="nb">echo</span> <span class="s2">"Creating in between file..."</span>
+<span class="o">!</span>touch betweenfile.txt
+<span class="o">!</span>touch -t <span class="m">202004201234</span> betweenfile.txt
+<span class="o">!</span>stat -f <span class="s2">"Access (atime): %Sa%nModify (mtime): %Sm%nChange (ctime): %Sc%nBirth  (Btime): %SB"</span> betweenfile.txt
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>/Users/antoine/.Trash
+Creating in between file...
+Access (atime): Apr 20 12:34:00 2020
+Modify (mtime): Apr 20 12:34:00 2020
+Change (ctime): May 15 16:39:46 2020
+Birth  (Btime): Apr 20 12:34:00 2020
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Find files with access time older than a specified number of days in the past:</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">!</span>find ./oldfile.txt ./betweenfile.txt ./newfile.txt -atime +20
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>./oldfile.txt
+./betweenfile.txt
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Find files with access time newer than a specified number of days in the past:</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">!</span>find ./oldfile.txt ./betweenfile.txt ./newfile.txt -atime -30
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>./betweenfile.txt
+./newfile.txt
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Find files with change time more recent than a specified number of minutes in the past:</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">!</span>touch -m ./betweenfile.txt
+<span class="o">!</span>find ./oldfile.txt ./betweenfile.txt ./newfile.txt -cmin -1
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>./oldfile.txt
+./betweenfile.txt
+./newfile.txt
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="TODO">
+<a class="anchor" href="#TODO" aria-hidden="true"><span class="octicon octicon-link"></span></a>TODO<a class="anchor-link" href="#TODO"> </a>
+</h1>
+<ul>
+<li>
+<code>iname</code>: case insensitive</li>
+<li>
+<code>inode</code>: number of inode</li>
+<li>
+<code>user</code>: name of user to whom file belongs to</li>
+<li>
+<code>group</code>: name of group</li>
+<li>
+<code>regex</code>: use regular expression</li>
+</ul>
+
+</div>
+</div>
+</div>
+</div>
+
+
+
+  </div><!-- from https://github.com/utterance/utterances -->
+<script src="https://utteranc.es/client.js"
+        repo="antoinechoffrut/com-net-sec"
+        issue-term="title"
+        label="blogpost-comment"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+</script><a class="u-url" href="/com-net-sec/cheatsheet/cli/macos/2020/05/15/find-cheatsheet.html" hidden></a>
+</article>
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/com-net-sec/"></data>
+
+  <div class="wrapper">
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col">
+        <p class="feed-subscribe">
+          <a href="/com-net-sec/feed.xml">
+            <svg class="svg-icon orange">
+              <use xlink:href="/com-net-sec/assets/minima-social-icons.svg#rss"></use>
+            </svg><span>Subscribe</span>
+          </a>
+        </p>
+      </div>
+      <div class="footer-col">
+        <p>Ressources on computers, networks, and security</p>
+      </div>
+    </div>
+
+    <div class="social-links"><ul class="social-media-list"><li><a rel="me" href="https://github.com/antoinechoffrut" title="antoinechoffrut"><svg class="svg-icon grey"><use xlink:href="/com-net-sec/assets/minima-social-icons.svg#github"></use></svg></a></li></ul>
+</div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>
