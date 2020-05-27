@@ -9,6 +9,8 @@ vendor
 _notebooks/.ipynb_checkpoints
 .DS_Store
 .python-version
+settings.ini
+*shell*
 
 # Local Netlify folder
 .netlify
