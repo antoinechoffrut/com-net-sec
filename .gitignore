@@ -23,9 +23,14 @@ _notebooks/*
 # ... but explicitly list _wanted_ jupyter notebooks
 !2020-05-05-grep-cheatsheet.ipynb
 !2020-05-15-find-cheatsheet.ipynb
-
+!2020-05-15-sed-cheatsheet.ipynb
 
 # Exclude _all_ markdown pages by default...
 _posts/*.*
 
 # ... but explicitly list _wanted_ markdown pages
+!2020-05-06-port-numbers.md
+!2020-05-07-ip-addressing.md
+!2020-05-29-wireless-network-technologies.md
+2020-05-27-storage-devices.md
+
