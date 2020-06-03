@@ -1,0 +1,2734 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.6.1 -->
+<title>The sed command (macOS) | On computers, networks, and security</title>
+<meta name="generator" content="Jekyll v4.0.0" />
+<meta property="og:title" content="The sed command (macOS)" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="The sed command is a stream text editor, capable of performing searches and substitution, and supports regular expressions" />
+<meta property="og:description" content="The sed command is a stream text editor, capable of performing searches and substitution, and supports regular expressions" />
+<link rel="canonical" href="https://antoinechoffrut.github.io/com-net-sec/cheatsheet/cli/macos/2020/05/15/sed-cheatsheet.html" />
+<meta property="og:url" content="https://antoinechoffrut.github.io/com-net-sec/cheatsheet/cli/macos/2020/05/15/sed-cheatsheet.html" />
+<meta property="og:site_name" content="On computers, networks, and security" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2020-05-15T00:00:00-05:00" />
+<script type="application/ld+json">
+{"description":"The sed command is a stream text editor, capable of performing searches and substitution, and supports regular expressions","mainEntityOfPage":{"@type":"WebPage","@id":"https://antoinechoffrut.github.io/com-net-sec/cheatsheet/cli/macos/2020/05/15/sed-cheatsheet.html"},"@type":"BlogPosting","url":"https://antoinechoffrut.github.io/com-net-sec/cheatsheet/cli/macos/2020/05/15/sed-cheatsheet.html","headline":"The sed command (macOS)","dateModified":"2020-05-15T00:00:00-05:00","datePublished":"2020-05-15T00:00:00-05:00","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/com-net-sec/assets/css/style.css"><link type="application/atom+xml" rel="alternate" href="https://antoinechoffrut.github.io/com-net-sec/feed.xml" title="On computers, networks, and security" /><link rel="shortcut icon" type="image/x-icon" href="/com-net-sec/images/favicon.ico"><!-- Begin Jekyll SEO tag v2.6.1 -->
+<title>The sed command (macOS) | On computers, networks, and security</title>
+<meta name="generator" content="Jekyll v4.0.0" />
+<meta property="og:title" content="The sed command (macOS)" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="The sed command is a stream text editor, capable of performing searches and substitution, and supports regular expressions" />
+<meta property="og:description" content="The sed command is a stream text editor, capable of performing searches and substitution, and supports regular expressions" />
+<link rel="canonical" href="https://antoinechoffrut.github.io/com-net-sec/cheatsheet/cli/macos/2020/05/15/sed-cheatsheet.html" />
+<meta property="og:url" content="https://antoinechoffrut.github.io/com-net-sec/cheatsheet/cli/macos/2020/05/15/sed-cheatsheet.html" />
+<meta property="og:site_name" content="On computers, networks, and security" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2020-05-15T00:00:00-05:00" />
+<script type="application/ld+json">
+{"description":"The sed command is a stream text editor, capable of performing searches and substitution, and supports regular expressions","mainEntityOfPage":{"@type":"WebPage","@id":"https://antoinechoffrut.github.io/com-net-sec/cheatsheet/cli/macos/2020/05/15/sed-cheatsheet.html"},"@type":"BlogPosting","url":"https://antoinechoffrut.github.io/com-net-sec/cheatsheet/cli/macos/2020/05/15/sed-cheatsheet.html","headline":"The sed command (macOS)","dateModified":"2020-05-15T00:00:00-05:00","datePublished":"2020-05-15T00:00:00-05:00","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+<link href="https://unpkg.com/@primer/css/dist/primer.css" rel="stylesheet" />
+<link rel="stylesheet" href="//use.fontawesome.com/releases/v5.0.7/css/all.css"><link type="application/atom+xml" rel="alternate" href="https://antoinechoffrut.github.io/com-net-sec/feed.xml" title="On computers, networks, and security" />
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js"></script>
+<script type="text/javascript">
+require.config({
+  paths: {
+    jquery: 'https://code.jquery.com/jquery-3.5.0.min',
+    plotly: 'https://cdn.plot.ly/plotly-latest.min'
+  },
+
+  shim: {
+    plotly: {
+      deps: ['jquery'],
+      exports: 'plotly'
+    }
+  }
+});
+</script>
+
+<script>
+function wrap_img(fn) {
+    if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
+        var elements = document.querySelectorAll(".post img");
+        Array.prototype.forEach.call(elements, function(el, i) {
+            if (el.getAttribute("title") && (el.className != "emoji")) {
+                const caption = document.createElement('figcaption');
+                var node = document.createTextNode(el.getAttribute("title"));
+                caption.appendChild(node);
+                const wrapper = document.createElement('figure');
+                wrapper.className = 'image';
+                el.parentNode.insertBefore(wrapper, el);
+                el.parentNode.removeChild(el);
+                wrapper.appendChild(el);
+                wrapper.appendChild(caption);
+            }
+        });
+    } else { document.addEventListener('DOMContentLoaded', fn); }
+}
+window.onload = wrap_img;
+</script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function(){
+    // add link icon to anchor tags
+    var elem = document.querySelectorAll(".anchor-link")
+    elem.forEach(e => (e.innerHTML = '<i class="fas fa-link fa-xs"></i>'));
+    });
+</script>
+</head><body><header class="site-header">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/com-net-sec/">On computers, networks, and security</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/com-net-sec/about/">About</a><a class="page-link" href="/com-net-sec/search/">Search</a><a class="page-link" href="/com-net-sec/categories/">Tags</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">The sed command (macOS)</h1><p class="page-description">The sed command is a stream text editor, capable of performing searches and substitution, and supports regular expressions</p><p class="post-meta post-meta-title"><time class="dt-published" datetime="2020-05-15T00:00:00-05:00" itemprop="datePublished">
+        May 15, 2020
+      </time>
+       • <span class="read-time" title="Estimated read time">
+    
+    
+      8 min read
+    
+</span></p>
+
+    
+      <p class="category-tags"><i class="fas fa-tags category-tags-icon"></i></i> 
+      
+        <a class="category-tags-link" href="/com-net-sec/categories/#cheatsheet">cheatsheet</a>
+        &nbsp;
+      
+        <a class="category-tags-link" href="/com-net-sec/categories/#cli">cli</a>
+        &nbsp;
+      
+        <a class="category-tags-link" href="/com-net-sec/categories/#macOS">macOS</a>
+        
+      
+      </p>
+    
+
+    
+      
+        <div class="pb-5 d-flex flex-wrap flex-justify-end">
+          <div class="px-2">
+
+    <a href="https://github.com/antoinechoffrut/com-net-sec/tree/master/_notebooks/2020-05-15-sed-cheatsheet.ipynb" role="button" target="_blank">
+<img class="notebook-badge-image" src="/com-net-sec/assets/badges/github.svg" alt="View On GitHub">
+    </a>
+</div>
+
+          <div class="px-2">
+    <a href="https://mybinder.org/v2/gh/antoinechoffrut/com-net-sec/master?filepath=_notebooks%2F2020-05-15-sed-cheatsheet.ipynb" target="_blank">
+        <img class="notebook-badge-image" src="/com-net-sec/assets/badges/binder.svg" alt="Open In Binder"/>
+    </a>
+</div>
+
+          <div class="px-2">
+    <a href="https://colab.research.google.com/github/antoinechoffrut/com-net-sec/blob/master/_notebooks/2020-05-15-sed-cheatsheet.ipynb" target="_blank">
+        <img class="notebook-badge-image" src="/com-net-sec/assets/badges/colab.svg" alt="Open In Colab"/>
+    </a>
+</div>
+        </div>
+      </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <ul class="section-nav">
+<li class="toc-entry toc-h1"><a href="#Preliminaries">Preliminaries </a>
+<ul>
+<li class="toc-entry toc-h2"><a href="#References">References </a></li>
+<li class="toc-entry toc-h2"><a href="#BSD-sed">BSD sed </a></li>
+</ul>
+</li>
+<li class="toc-entry toc-h1"><a href="#Basic-usage">Basic usage </a>
+<ul>
+<li class="toc-entry toc-h2"><a href="#Silent-mode-with-flag-n,-print-with-command-p">Silent mode with flag-n, print with command p </a></li>
+<li class="toc-entry toc-h2"><a href="#Pattern-matching">Pattern matching </a></li>
+<li class="toc-entry toc-h2"><a href="#Quit-with-command-q">Quit with command q </a></li>
+<li class="toc-entry toc-h2"><a href="#Transformation-with-y:">Transformation with y: </a></li>
+<li class="toc-entry toc-h2"><a href="#Substitution-with-s">Substitution with s </a></li>
+<li class="toc-entry toc-h2"><a href="#Select-occurrence-for-substitution-with-index:-/1,-/2,-etc.">Select occurrence for substitution with index: /1, /2, etc. </a></li>
+<li class="toc-entry toc-h2"><a href="#Global-substitution:-/g">Global substitution: /g </a></li>
+<li class="toc-entry toc-h2"><a href="#Silence-output-with--n,-printed-substituted-lines-with-/p">Silence output with -n, printed substituted lines with /p </a></li>
+<li class="toc-entry toc-h2"><a href="#Regular-expressions">Regular expressions </a></li>
+<li class="toc-entry toc-h2"><a href="#Refer-to-the-match-with-&">Refer to the match with &amp; </a></li>
+<li class="toc-entry toc-h2"><a href="#Handle-on-matches:-(-),-\1,-\2,-etc.">Handle on matches: ( ), \1, \2, etc. </a></li>
+</ul>
+</li>
+<li class="toc-entry toc-h1"><a href="#Duplicate-grep-with--n-and-/p">Duplicate grep with -n and /p </a></li>
+<li class="toc-entry toc-h1"><a href="#Execute-several-commands:--e">Execute several commands: -e </a>
+<ul>
+<li class="toc-entry toc-h2"><a href="#Delete-lines">Delete lines </a></li>
+<li class="toc-entry toc-h2"><a href="#Combining--substitution-flags">Combining  substitution flags </a></li>
+<li class="toc-entry toc-h2"><a href="#Restricting-to-a-line-number">Restricting to a line number </a></li>
+<li class="toc-entry toc-h2"><a href="#Match-and-substitution">Match and substitution </a></li>
+</ul>
+</li>
+<li class="toc-entry toc-h1"><a href="#Further-examples">Further examples </a>
+<ul>
+<li class="toc-entry toc-h2"><a href="#Ranges-by-line-number">Ranges by line number </a></li>
+<li class="toc-entry toc-h2"><a href="#Ranges-by-patterns">Ranges by patterns </a></li>
+<li class="toc-entry toc-h2"><a href="#Hybrid-ranges">Hybrid ranges </a></li>
+</ul>
+</li>
+</ul><!--
+#################################################
+### THIS FILE WAS AUTOGENERATED! DO NOT EDIT! ###
+#################################################
+# file to edit: _notebooks/2020-05-15-sed-cheatsheet.ipynb
+-->
+
+<div class="container" id="notebook-container">
+        
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Preliminaries">
+<a class="anchor" href="#Preliminaries" aria-hidden="true"><span class="octicon octicon-link"></span></a>Preliminaries<a class="anchor-link" href="#Preliminaries"> </a>
+</h1>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="References">
+<a class="anchor" href="#References" aria-hidden="true"><span class="octicon octicon-link"></span></a>References<a class="anchor-link" href="#References"> </a>
+</h2>
+<ul>
+<li>
+<a href="https://www.freebsd.org/cgi/man.cgi?query=sed">FreeBSD man page</a> (freebsd)</li>
+<li>
+<a href="https://ss64.com/osx/sed.html">mac OS sed documentation</a> (ss64)</li>
+<li>
+<a href="https://www.grymoire.com/Unix/Sed.html">sed tutorial</a> (grymoire)</li>
+<li><a href="https://www.ibm.com/support/knowledgecenter/en/ssw_aix_72/s_commands/sed.html">IBM: the <code>sed</code> command</a></li>
+</ul>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="BSD-sed">
+<a class="anchor" href="#BSD-sed" aria-hidden="true"><span class="octicon octicon-link"></span></a>BSD <code>sed</code><a class="anchor-link" href="#BSD-sed"> </a>
+</h2>
+<p></p>
+<div class="flash flash-warn">
+    <svg class="octicon octicon-zap" viewbox="0 0 10 16" version="1.1" width="10" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M10 7H6l3-7-9 9h4l-3 7 9-9z"></path></svg>
+    <strong>Important: </strong>MacOS uses the FreeBSD version of <code>sed</code>:
+</div>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">man</span> <span class="n">sed</span> <span class="o">|</span> <span class="n">grep</span> <span class="o">-</span><span class="n">n</span> <span class="s2">"BSD"</span> <span class="o">-</span><span class="n">C1</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>1-
+2:SED(1)                    BSD General Commands Manual                   SED(1)
+3-
+--
+--
+345-
+346:     The -E, -a and -i options are non-standard FreeBSD extensions and may not
+347-     be available on other operating systems.
+--
+--
+352-AUTHORS
+353:     Diomidis D. Spinellis &lt;dds@FreeBSD.org&gt;
+354-
+--
+--
+360-
+361:BSD                              May 10, 2005                              BSD
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p></p>
+<div class="flash">
+    <svg class="octicon octicon-info octicon octicon-info octicon octicon-info" viewbox="0 0 14 16" version="1.1" width="14" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M6.3 5.69a.942.942 0 01-.28-.7c0-.28.09-.52.28-.7.19-.18.42-.28.7-.28.28 0 .52.09.7.28.18.19.28.42.28.7 0 .28-.09.52-.28.7a1 1 0 01-.7.3c-.28 0-.52-.11-.7-.3zM8 7.99c-.02-.25-.11-.48-.31-.69-.2-.19-.42-.3-.69-.31H6c-.27.02-.48.13-.69.31-.2.2-.3.44-.31.69h1v3c.02.27.11.5.31.69.2.2.42.31.69.31h1c.27 0 .48-.11.69-.31.2-.19.3-.42.31-.69H8V7.98v.01zM7 2.3c-3.14 0-5.7 2.54-5.7 5.68 0 3.14 2.56 5.7 5.7 5.7s5.7-2.55 5.7-5.7c0-3.15-2.56-5.69-5.7-5.69v.01zM7 .98c3.86 0 7 3.14 7 7s-3.14 7-7 7-7-3.12-7-7 3.14-7 7-7z"></path></svg>
+    <strong>Note: </strong>There doesn’t seem to be a way to find a version number on macOS from the OS, even if one looks in the binary code with the command <code>strings $(which sed)</code>.  However, this information is available from <a href="https://opensource.apple.com/source/text_cmds/">apple’s source browser</a>.
+</div>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Basic-usage">
+<a class="anchor" href="#Basic-usage" aria-hidden="true"><span class="octicon octicon-link"></span></a>Basic usage<a class="anchor-link" href="#Basic-usage"> </a>
+</h1>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Silent-mode-with-flag-n,-print-with-command-p">
+<a class="anchor" href="#Silent-mode-with-flag-n,-print-with-command-p" aria-hidden="true"><span class="octicon octicon-link"></span></a>Silent mode with flag<code>-n</code>, print with command <code>p</code><a class="anchor-link" href="#Silent-mode-with-flag-n,-print-with-command-p"> </a>
+</h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>By default, the command <code>sed</code> simply outputs each line, one at a time:</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">echo</span> <span class="o">-</span><span class="n">e</span> <span class="s2">"bob</span><span class="se">\n</span><span class="s2">joe</span><span class="se">\n</span><span class="s2">tim"</span> <span class="o">|</span> <span class="n">sed</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>bob
+joe
+tim
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Do not print anything:</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">echo</span> <span class="o">-</span><span class="n">e</span> <span class="s2">"bob</span><span class="se">\n</span><span class="s2">joe</span><span class="se">\n</span><span class="s2">tim"</span> <span class="o">|</span> <span class="n">sed</span> <span class="o">-</span><span class="n">n</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Duplicate every line, i.e. for each line, print it:</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">echo</span> <span class="o">-</span><span class="n">e</span> <span class="s2">"bob</span><span class="se">\n</span><span class="s2">joe</span><span class="se">\n</span><span class="s2">tim"</span> <span class="o">|</span> <span class="n">sed</span> <span class="s1">'p'</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>bob
+bob
+joe
+joe
+tim
+tim
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Print each line once:</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">echo</span> <span class="o">-</span><span class="n">e</span> <span class="s1">'bob</span><span class="se">\n</span><span class="s1">joe</span><span class="se">\n</span><span class="s1">tim'</span> <span class="o">|</span> <span class="n">sed</span> <span class="o">-</span><span class="n">n</span> <span class="s1">'p'</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>bob
+joe
+tim
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Reverse command with '!':</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">echo</span> <span class="o">-</span><span class="n">e</span> <span class="s1">'bob</span><span class="se">\n</span><span class="s1">joe</span><span class="se">\n</span><span class="s1">time'</span> <span class="o">|</span> <span class="n">sed</span> <span class="o">-</span><span class="n">n</span> <span class="s1">'!p'</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Pattern-matching">
+<a class="anchor" href="#Pattern-matching" aria-hidden="true"><span class="octicon octicon-link"></span></a>Pattern matching<a class="anchor-link" href="#Pattern-matching"> </a>
+</h2>
+<p>Print lines matching a pattern with the command <code>p</code>:</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">echo</span> <span class="o">-</span><span class="n">e</span> <span class="s2">"bob rob bob</span><span class="se">\n</span><span class="s2">joe</span><span class="se">\n</span><span class="s2">bob"</span> <span class="o">|</span> <span class="n">sed</span> <span class="o">-</span><span class="n">n</span> <span class="s1">'/bob/p'</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>bob rob bob
+bob
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Some explanations:</p>
+<ul>
+<li>
+<code>-n</code>: do not print anything;</li>
+<li>
+<code>/bob/</code>: pattern to match;</li>
+<li>
+<code>/p</code>: print line when there is a match.</li>
+</ul>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Print lines <em>not</em> matching a pattern:</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">echo</span> <span class="o">-</span><span class="n">e</span> <span class="s2">"bob rob bob</span><span class="se">\n</span><span class="s2">joe</span><span class="se">\n</span><span class="s2">bob</span><span class="se">\n</span><span class="s2">tim"</span> <span class="o">|</span> <span class="n">sed</span> <span class="o">-</span><span class="n">n</span> <span class="s1">'/bob/ !p'</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>joe
+tim
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Print line numbers where matches occur with the command <code>=</code>:</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">echo</span> <span class="o">-</span><span class="n">e</span> <span class="s2">"bob rob bob</span><span class="se">\n</span><span class="s2">joe</span><span class="se">\n</span><span class="s2">bob"</span> <span class="o">|</span> <span class="n">sed</span> <span class="o">-</span><span class="n">n</span> <span class="s1">'/bob/='</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>1
+3
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Quit-with-command-q">
+<a class="anchor" href="#Quit-with-command-q" aria-hidden="true"><span class="octicon octicon-link"></span></a>Quit with command <code>q</code><a class="anchor-link" href="#Quit-with-command-q"> </a>
+</h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Quit printing file after match:</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">echo</span> <span class="o">-</span><span class="n">e</span> <span class="s1">'one: bob</span><span class="se">\n</span><span class="s1">two: bob</span><span class="se">\n</span><span class="s1">three:bob</span><span class="se">\n</span><span class="s1">'</span> <span class="o">|</span> <span class="n">sed</span> <span class="o">-</span><span class="n">e</span> <span class="s1">'/two/ q'</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>one: bob
+two: bob
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>As an application, perform substitution up to match:</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">echo</span> <span class="o">-</span><span class="n">e</span> <span class="s1">'one: bob</span><span class="se">\n</span><span class="s1">two: bob</span><span class="se">\n</span><span class="s1">three:bob</span><span class="se">\n</span><span class="s1">'</span> <span class="o">|</span> <span class="n">sed</span> <span class="o">-</span><span class="n">e</span> <span class="s1">'s/bob/BOB/'</span> <span class="o">-</span><span class="n">e</span> <span class="s1">'/two/ q'</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>one: BOB
+two: BOB
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Note how the order matters;</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">echo</span> <span class="o">-</span><span class="n">e</span> <span class="s1">'one: bob</span><span class="se">\n</span><span class="s1">two: bob</span><span class="se">\n</span><span class="s1">three:bob</span><span class="se">\n</span><span class="s1">'</span> <span class="o">|</span> <span class="n">sed</span> <span class="o">-</span><span class="n">e</span> <span class="s1">'/two/ q'</span> <span class="o">-</span><span class="n">e</span> <span class="s1">'s/bob/BOB/'</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>one: BOB
+two: bob
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Transformation-with-y:">
+<a class="anchor" href="#Transformation-with-y:" aria-hidden="true"><span class="octicon octicon-link"></span></a>Transformation with <code>y</code>:<a class="anchor-link" href="#Transformation-with-y:"> </a>
+</h2>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">echo</span> <span class="s2">"This is NOW in loweRcase"</span> <span class="o">|</span> <span class="n">sed</span> <span class="s1">'y/ABCDEFGHIJKLMNOPQRSTUVWXYZ/abcdefghijklmnopqrstuvwxyz/'</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>this is now in lowercase
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Substitution-with-s">
+<a class="anchor" href="#Substitution-with-s" aria-hidden="true"><span class="octicon octicon-link"></span></a>Substitution with <code>s</code><a class="anchor-link" href="#Substitution-with-s"> </a>
+</h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Sustitute a word for another, in each line:</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">echo</span> <span class="o">-</span><span class="n">e</span> <span class="s2">"day</span><span class="se">\n</span><span class="s2">Day</span><span class="se">\n</span><span class="s2">dAy</span><span class="se">\n</span><span class="s2">Monday"</span> <span class="o">|</span> <span class="n">sed</span> <span class="s1">'s/day/night/'</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>night
+Day
+dAy
+Monnight
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Note that the match is case-sensitive.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Only the first occurrence in each line will be substituted:</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">echo</span> <span class="o">-</span><span class="n">e</span> <span class="s2">"one two three, one two three </span><span class="se">\n</span><span class="s2">four three two one</span><span class="se">\n</span><span class="s2">one hundred"</span> <span class="o">|</span> <span class="n">sed</span> <span class="s1">'s/one/ONE/'</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>ONE two three, one two three 
+four three two ONE
+ONE hundred
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Select-occurrence-for-substitution-with-index:-/1,-/2,-etc.">
+<a class="anchor" href="#Select-occurrence-for-substitution-with-index:-/1,-/2,-etc." aria-hidden="true"><span class="octicon octicon-link"></span></a>Select occurrence for substitution with index: <code>/1</code>, <code>/2</code>, etc.<a class="anchor-link" href="#Select-occurrence-for-substitution-with-index:-/1,-/2,-etc."> </a>
+</h2>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">echo</span> <span class="s2">"one one one"</span> <span class="o">|</span> <span class="n">sed</span> <span class="s1">'s/one/ONE/1'</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>ONE one one
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">echo</span> <span class="s2">"one one one"</span> <span class="o">|</span> <span class="n">sed</span> <span class="s1">'s/one/ONE/2'</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>one ONE one
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">echo</span> <span class="s2">"one one one"</span> <span class="o">|</span> <span class="n">sed</span> <span class="s1">'s/one/ONE/3'</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>one one ONE
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">echo</span> <span class="s2">"one one one"</span> <span class="o">|</span> <span class="n">sed</span> <span class="s1">'s/one/ONE/4'</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>one one one
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Global-substitution:-/g">
+<a class="anchor" href="#Global-substitution:-/g" aria-hidden="true"><span class="octicon octicon-link"></span></a>Global substitution: <code>/g</code><a class="anchor-link" href="#Global-substitution:-/g"> </a>
+</h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>To perform substitution on all non-overlapping match, use the <code>/g</code> option:</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">echo</span> <span class="o">-</span><span class="n">e</span> <span class="s2">"one two three, one two three </span><span class="se">\n</span><span class="s2">four three two one</span><span class="se">\n</span><span class="s2">one hundred"</span> <span class="o">|</span> <span class="n">sed</span> <span class="s1">'s/one/ONE/g'</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>ONE two three, ONE two three 
+four three two ONE
+ONE hundred
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Silence-output-with--n,-printed-substituted-lines-with-/p">
+<a class="anchor" href="#Silence-output-with--n,-printed-substituted-lines-with-/p" aria-hidden="true"><span class="octicon octicon-link"></span></a>Silence output with <code>-n</code>, printed substituted lines with <code>/p</code><a class="anchor-link" href="#Silence-output-with--n,-printed-substituted-lines-with-/p"> </a>
+</h2>
+<p>The flag <code>-n</code>, nothing is sent to standard output:</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">echo</span> <span class="o">-</span><span class="n">e</span> <span class="s2">"day</span><span class="se">\n</span><span class="s2">Day</span><span class="se">\n</span><span class="s2">dAy</span><span class="se">\n</span><span class="s2">Monday"</span> <span class="o">|</span> <span class="n">sed</span> <span class="o">-</span><span class="n">n</span> <span class="s1">'s/day/night/'</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>But with the <code>/p</code> flag, write the pattern space to standard output if a substitution occurred:</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">echo</span> <span class="o">-</span><span class="n">e</span> <span class="s2">"day</span><span class="se">\n</span><span class="s2">Day</span><span class="se">\n</span><span class="s2">dAy</span><span class="se">\n</span><span class="s2">Monday"</span> <span class="o">|</span> <span class="n">sed</span> <span class="o">-</span><span class="n">n</span> <span class="s1">'s/day/night/p'</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>night
+Monnight
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Thus, without the option <code>-n</code>, lines with substitution appear twice:</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">echo</span> <span class="o">-</span><span class="n">e</span> <span class="s2">"day</span><span class="se">\n</span><span class="s2">Day</span><span class="se">\n</span><span class="s2">dAy</span><span class="se">\n</span><span class="s2">Monday"</span> <span class="o">|</span> <span class="n">sed</span> <span class="s1">'s/day/night/p'</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>night
+night
+Day
+dAy
+Monnight
+Monnight
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Regular-expressions">
+<a class="anchor" href="#Regular-expressions" aria-hidden="true"><span class="octicon octicon-link"></span></a>Regular expressions<a class="anchor-link" href="#Regular-expressions"> </a>
+</h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Replace the first single-digit number with a fixed string:</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">echo</span> <span class="s2">"abce345f"</span> <span class="o">|</span> <span class="n">sed</span> <span class="s1">'s/[0-9]/X/'</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>abceX45f
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Replace the first longest consecutive string of digits with a fixed string:</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">echo</span> <span class="s2">"123 456 abc"</span> <span class="o">|</span> <span class="n">sed</span> <span class="s1">'s/[0-9]*/X/'</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>X 456 abc
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p></p>
+<div class="flash flash-warn">
+    <svg class="octicon octicon-zap octicon octicon-zap" viewbox="0 0 10 16" version="1.1" width="10" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M10 7H6l3-7-9 9h4l-3 7 9-9z"></path></svg>
+    <strong>Important: </strong>Since the asterisk <code>*</code> stands for <strong>zero</strong> or more character, the first match for <code>[0-9]*</code> will occur at the beginning of the line if it doesn’t start with a number:
+</div>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">echo</span> <span class="s2">"abc 123 def "</span> <span class="o">|</span> <span class="n">sed</span> <span class="s1">'s/[0-9]*/X/'</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Xabc 123 def 
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>To match <strong>one</strong> or more character, use the extended regular expressioon <code>+</code>, with the option <code>-E</code>:</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">echo</span> <span class="s2">"abc 123 def "</span> <span class="o">|</span> <span class="n">sed</span> <span class="o">-</span><span class="n">E</span> <span class="s1">'s/[0-9]+/X/'</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>abc X def 
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Refer-to-the-match-with-&amp;">
+<a class="anchor" href="#Refer-to-the-match-with-&amp;" aria-hidden="true"><span class="octicon octicon-link"></span></a>Refer to the match with <code>&amp;</code><a class="anchor-link" href="#Refer-to-the-match-with-&amp;"> </a>
+</h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Put parentheses around the first digit appearing in the line:</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">echo</span> <span class="s2">"abc 123 def "</span> <span class="o">|</span> <span class="n">sed</span> <span class="o">-</span><span class="n">E</span> <span class="s1">'s/[0-9]/(&amp;)/'</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>abc (1)23 def 
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Put parentheses around the first multi-digit number appearing in the line:</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">echo</span> <span class="s2">"abc 123 def "</span> <span class="o">|</span> <span class="n">sed</span> <span class="o">-</span><span class="n">E</span> <span class="s1">'s/[0-9]+/(&amp;)/'</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>abc (123) def 
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Put parentheses around each digit appearing in the line:</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">echo</span> <span class="s2">"abc 123 def 456"</span> <span class="o">|</span> <span class="n">sed</span> <span class="o">-</span><span class="n">E</span> <span class="s1">'s/[0-9]/(&amp;)/g'</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>abc (1)(2)(3) def (4)(5)(6)
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><code>&amp;</code> can be used multiple times:</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">echo</span> <span class="s2">"abc 123 def"</span> <span class="o">|</span> <span class="n">sed</span> <span class="o">-</span><span class="n">E</span> <span class="s1">'s/[0-9]+/(&amp; &amp;)/'</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>abc (123 123) def
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Handle-on-matches:-(-),-\1,-\2,-etc.">
+<a class="anchor" href="#Handle-on-matches:-(-),-%5C1,-%5C2,-etc." aria-hidden="true"><span class="octicon octicon-link"></span></a>Handle on matches: <code>(</code> <code>)</code>, <code>\1</code>, <code>\2</code>, etc.<a class="anchor-link" href="#Handle-on-matches:-(-),-%5C1,-%5C2,-etc."> </a>
+</h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Keep only first word of line, using a basic regular expression:</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">echo</span> <span class="s2">"Do not do this"</span> <span class="o">|</span> <span class="n">sed</span> <span class="s1">'s/\([a-zA-Z]*\).*/</span><span class="se">\1</span><span class="s1">/'</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Do
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>... and using an extenced regular expression:</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">echo</span> <span class="s2">"Do not do this"</span> <span class="o">|</span> <span class="n">sed</span> <span class="o">-</span><span class="n">E</span> <span class="s1">'s/([a-zA-Z]*).*/</span><span class="se">\1</span><span class="s1">/'</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Do
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Swap strings:</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">echo</span> <span class="s2">"123 321: swap occurred"</span> <span class="o">|</span> <span class="n">sed</span> <span class="o">-</span><span class="n">E</span> <span class="s1">'s/([0-9]+) ([0-9]+)/</span><span class="se">\2</span><span class="s1"> </span><span class="se">\1</span><span class="s1">/'</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>321 123: swap occurred
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Remove duplicated words:</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">echo</span> <span class="s2">"I I don't stutter stutter"</span> <span class="o">|</span> <span class="n">sed</span> <span class="s1">'s/\([a-zA-Z]*\) </span><span class="se">\1</span><span class="s1">/</span><span class="se">\1</span><span class="s1"> /g'</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>I  don't stutter 
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">echo</span> <span class="s2">"I I don't stutter stutter"</span> <span class="o">|</span> <span class="n">sed</span> <span class="s1">'s/\([a-zA-Z]*\) </span><span class="se">\1</span><span class="s1">/</span><span class="se">\1</span><span class="s1"> /g'</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>I  don't stutter 
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Parentheses around first word:</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">echo</span> <span class="s2">"put parentheses around first blob"</span> <span class="o">|</span> <span class="n">sed</span> <span class="s1">'s/[^ ]*/(&amp;)/'</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>(put) parentheses around first blob
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Apply substitution on second occurrence only:</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">echo</span> <span class="s2">"au invisibleword clair de la lune"</span> <span class="o">|</span> <span class="n">sed</span> <span class="o">-</span><span class="n">E</span> <span class="s1">'s/[a-z]+//2'</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>au  clair de la lune
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Add a colon after character in position <code>10</code>:</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">echo</span> <span class="s2">"add a colon after character in position ten"</span> <span class="o">|</span> <span class="n">sed</span> <span class="s1">'s/./&amp;:/10'</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>add a colo:n after character in position ten
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Duplicate-grep-with--n-and-/p">
+<a class="anchor" href="#Duplicate-grep-with--n-and-/p" aria-hidden="true"><span class="octicon octicon-link"></span></a>Duplicate <code>grep</code> with <code>-n</code> and <code>/p</code><a class="anchor-link" href="#Duplicate-grep-with--n-and-/p"> </a>
+</h1>
+<p></p>
+<div class="flash">
+    <svg class="octicon octicon-info octicon octicon-info octicon octicon-info octicon octicon-info" viewbox="0 0 14 16" version="1.1" width="14" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M6.3 5.69a.942.942 0 01-.28-.7c0-.28.09-.52.28-.7.19-.18.42-.28.7-.28.28 0 .52.09.7.28.18.19.28.42.28.7 0 .28-.09.52-.28.7a1 1 0 01-.7.3c-.28 0-.52-.11-.7-.3zM8 7.99c-.02-.25-.11-.48-.31-.69-.2-.19-.42-.3-.69-.31H6c-.27.02-.48.13-.69.31-.2.2-.3.44-.31.69h1v3c.02.27.11.5.31.69.2.2.42.31.69.31h1c.27 0 .48-.11.69-.31.2-.19.3-.42.31-.69H8V7.98v.01zM7 2.3c-3.14 0-5.7 2.54-5.7 5.68 0 3.14 2.56 5.7 5.7 5.7s5.7-2.55 5.7-5.7c0-3.15-2.56-5.69-5.7-5.69v.01zM7 .98c3.86 0 7 3.14 7 7s-3.14 7-7 7-7-3.12-7-7 3.14-7 7-7z"></path></svg>
+    <strong>Note: </strong><code>grep</code> looks for the first occurrence of a pattern in each line:
+</div>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">echo</span> <span class="o">-</span><span class="n">e</span> <span class="s2">"bob rob bob</span><span class="se">\n</span><span class="s2">joe</span><span class="se">\n</span><span class="s2">bob"</span> <span class="o">|</span> <span class="n">grep</span> <span class="s2">"bob"</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>bob rob bob
+bob
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">echo</span> <span class="o">-</span><span class="n">e</span> <span class="s2">"bob rob bob</span><span class="se">\n</span><span class="s2">joe</span><span class="se">\n</span><span class="s2">bob"</span> <span class="o">|</span> <span class="n">sed</span> <span class="o">-</span><span class="n">n</span> <span class="s1">'s/bob/&amp;/p'</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>bob rob bob
+bob
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">echo</span> <span class="o">-</span><span class="n">e</span> <span class="s2">"bob rob bob</span><span class="se">\n</span><span class="s2">joe</span><span class="se">\n</span><span class="s2">bob"</span> <span class="o">|</span> <span class="n">sed</span> <span class="o">-</span><span class="n">n</span> <span class="s1">'/bob/p'</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>bob rob bob
+bob
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Execute-several-commands:--e">
+<a class="anchor" href="#Execute-several-commands:--e" aria-hidden="true"><span class="octicon octicon-link"></span></a>Execute several commands: <code>-e</code><a class="anchor-link" href="#Execute-several-commands:--e"> </a>
+</h1>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">echo</span> <span class="s2">"abc"</span> <span class="o">|</span> <span class="n">sed</span> <span class="o">-</span><span class="n">n</span> <span class="o">-</span><span class="n">e</span> <span class="s1">'s/a/1/p'</span> <span class="o">-</span><span class="n">e</span> <span class="s1">'s/b/2/p'</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>1bc
+12c
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Delete-lines">
+<a class="anchor" href="#Delete-lines" aria-hidden="true"><span class="octicon octicon-link"></span></a>Delete lines<a class="anchor-link" href="#Delete-lines"> </a>
+</h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Delete line by its number:</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">echo</span> <span class="o">-</span><span class="n">e</span> <span class="s2">"1</span><span class="se">\n</span><span class="s2">2</span><span class="se">\n</span><span class="s2">3"</span> <span class="o">|</span> <span class="n">sed</span> <span class="s1">'2d'</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>1
+3
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Delete last line:</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">echo</span> <span class="o">-</span><span class="n">e</span> <span class="s2">"1</span><span class="se">\n</span><span class="s2">2</span><span class="se">\n</span><span class="s2">3"</span> <span class="o">|</span> <span class="n">sed</span> <span class="s1">'$d'</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>1
+2
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">echo</span> <span class="o">-</span><span class="n">e</span> <span class="s1">'one</span><span class="se">\n\n</span><span class="s1">two</span><span class="se">\n\n</span><span class="s1">three'</span> <span class="o">|</span> <span class="n">sed</span> <span class="s1">'/\S/d'</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>one
+
+two
+
+three
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Combining--substitution-flags">
+<a class="anchor" href="#Combining--substitution-flags" aria-hidden="true"><span class="octicon octicon-link"></span></a>Combining  substitution flags<a class="anchor-link" href="#Combining--substitution-flags"> </a>
+</h2>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">echo</span> <span class="o">-</span><span class="n">e</span> <span class="s2">"one</span><span class="se">\n</span><span class="s2">one one</span><span class="se">\n</span><span class="s2">one one one</span><span class="se">\n</span><span class="s2">one one one one"</span> <span class="o">|</span> <span class="n">sed</span> <span class="o">-</span><span class="n">n</span> <span class="s1">'s/one/ONE/3p'</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>one one ONE
+one one ONE one
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Restricting-to-a-line-number">
+<a class="anchor" href="#Restricting-to-a-line-number" aria-hidden="true"><span class="octicon octicon-link"></span></a>Restricting to a line number<a class="anchor-link" href="#Restricting-to-a-line-number"> </a>
+</h2>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">echo</span> <span class="o">-</span><span class="n">e</span> <span class="s1">'one</span><span class="se">\n</span><span class="s1">one</span><span class="se">\n</span><span class="s1">one'</span> <span class="o">|</span> <span class="n">sed</span> <span class="s1">'2 s/one/ONE/'</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>one
+ONE
+one
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Match-and-substitution">
+<a class="anchor" href="#Match-and-substitution" aria-hidden="true"><span class="octicon octicon-link"></span></a>Match and substitution<a class="anchor-link" href="#Match-and-substitution"> </a>
+</h2>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">echo</span> <span class="o">-</span><span class="n">e</span> <span class="s2">"bob: hi</span><span class="se">\n</span><span class="s2">joe: hello</span><span class="se">\n</span><span class="s2">bob: how are you?"</span> <span class="o">|</span> <span class="n">sed</span> <span class="s1">'/bob/ s/h/H/'</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>bob: Hi
+joe: hello
+bob: How are you?
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">echo</span> <span class="o">-</span><span class="n">e</span> <span class="s1">'parentheses around first word of each lines</span><span class="se">\n</span><span class="s1">only if the word "line"</span><span class="se">\n</span><span class="s1">appears in it</span><span class="se">\n</span><span class="s1">this is the last line'</span> <span class="o">|</span> <span class="n">sed</span> <span class="o">-</span><span class="n">E</span>  <span class="s1">'/line/s/[a-z]+/(&amp;)/'</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>(parentheses) around first word of each lines
+(only) if the word "line"
+appears in it
+(this) is the last line
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Further-examples">
+<a class="anchor" href="#Further-examples" aria-hidden="true"><span class="octicon octicon-link"></span></a>Further examples<a class="anchor-link" href="#Further-examples"> </a>
+</h1>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">echo</span> <span class="o">-</span><span class="n">e</span> <span class="s1">'#a</span><span class="se">\n</span><span class="s1">this line does not start with a pound sign</span><span class="se">\n</span><span class="s1">#b'</span> <span class="o">|</span> <span class="n">sed</span> <span class="s1">'s/^#.*/[There was a line beginning with a pound sign]/'</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>[There was a line beginning with a pound sign]
+this line does not start with a pound sign
+[There was a line beginning with a pound sign]
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Count the number of non-blank lines not beginning with <code>#</code>:</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">echo</span> <span class="o">-</span><span class="n">e</span> <span class="s2">"#a</span><span class="se">\n</span><span class="s2">this line does not start with a pound sign</span><span class="se">\n</span><span class="s2">#b"</span> <span class="o">|</span> <span class="n">sed</span> <span class="s1">'s/^#.*//'</span> <span class="o">|</span> <span class="n">grep</span> <span class="s2">"\S"</span> <span class="o">|</span> <span class="n">wc</span> <span class="o">-</span><span class="n">l</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>       1
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Ranges-by-line-number">
+<a class="anchor" href="#Ranges-by-line-number" aria-hidden="true"><span class="octicon octicon-link"></span></a>Ranges by line number<a class="anchor-link" href="#Ranges-by-line-number"> </a>
+</h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Specify range of lines to which substitution is performed:</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">echo</span> <span class="o">-</span><span class="n">e</span> <span class="s2">"one</span><span class="se">\n</span><span class="s2">one</span><span class="se">\n</span><span class="s2">one</span><span class="se">\n</span><span class="s2">one"</span> <span class="o">|</span> <span class="n">sed</span> <span class="s1">'2,3 s/one/ONE/'</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>one
+ONE
+ONE
+one
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Perform subsitution from specified line to end of file:</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">echo</span> <span class="o">-</span><span class="n">e</span> <span class="s2">"one</span><span class="se">\n</span><span class="s2">one</span><span class="se">\n</span><span class="s2">one</span><span class="se">\n</span><span class="s2">one"</span> <span class="o">|</span> <span class="n">sed</span> <span class="s1">'2,$ s/one/ONE/'</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>one
+ONE
+ONE
+ONE
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Ranges-by-patterns">
+<a class="anchor" href="#Ranges-by-patterns" aria-hidden="true"><span class="octicon octicon-link"></span></a>Ranges by patterns<a class="anchor-link" href="#Ranges-by-patterns"> </a>
+</h2>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">echo</span> <span class="o">-</span><span class="n">e</span> <span class="s2">"one: bob</span><span class="se">\n</span><span class="s2">two: bob</span><span class="se">\n</span><span class="s2">three: bob</span><span class="se">\n</span><span class="s2">four: bob</span><span class="se">\n</span><span class="s2">five: bob"</span> <span class="o">|</span> <span class="n">sed</span> <span class="s1">'/two/,/three/ s/bob/BOB/'</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>one: bob
+two: BOB
+three: BOB
+four: bob
+five: bob
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Hybrid-ranges">
+<a class="anchor" href="#Hybrid-ranges" aria-hidden="true"><span class="octicon octicon-link"></span></a>Hybrid ranges<a class="anchor-link" href="#Hybrid-ranges"> </a>
+</h2>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">echo</span> <span class="o">-</span><span class="n">e</span> <span class="s2">"one: bob</span><span class="se">\n</span><span class="s2">two: bob</span><span class="se">\n</span><span class="s2">three: bob</span><span class="se">\n</span><span class="s2">four: bob</span><span class="se">\n</span><span class="s2">five: bob"</span> <span class="o">|</span> <span class="n">sed</span> <span class="s1">'2,/three/ s/bob/BOB/'</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>one: bob
+two: BOB
+three: BOB
+four: bob
+five: bob
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Remove everything up to the first blank line:</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">echo</span> <span class="o">-</span><span class="n">e</span> <span class="s2">"first line</span><span class="se">\n</span><span class="s2">second line</span><span class="se">\n\n</span><span class="s2">there was a blank line</span><span class="se">\n</span><span class="s2">right above</span><span class="se">\n</span><span class="s2">the end"</span> <span class="o">|</span> <span class="n">sed</span> <span class="s1">'1,/^$/d'</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>there was a blank line
+right above
+the end
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">echo</span> <span class="o">-</span><span class="n">e</span> <span class="s1">'a</span><span class="se">\n\n</span><span class="s1">b c'</span> <span class="o">|</span> <span class="n">grep</span> <span class="o">-</span><span class="n">n</span> <span class="o">--</span><span class="n">color</span> <span class="s1">'\s'</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>3:b<span class="ansi-red-intense-fg ansi-bold"> </span>c
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">echo</span> <span class="o">-</span><span class="n">e</span> <span class="s2">"first line</span><span class="se">\n</span><span class="s2">second line</span><span class="se">\n\n</span><span class="s2">there was a blank line</span><span class="se">\n</span><span class="s2">the end"</span> <span class="o">|</span> <span class="n">hexdump</span> <span class="o">-</span><span class="n">C</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>00000000  66 69 72 73 74 20 6c 69  6e 65 0a 73 65 63 6f 6e  |first line.secon|
+00000010  64 20 6c 69 6e 65 0a 0a  74 68 65 72 65 20 77 61  |d line..there wa|
+00000020  73 20 61 20 62 6c 61 6e  6b 20 6c 69 6e 65 0a 74  |s a blank line.t|
+00000030  68 65 20 65 6e 64 0a                              |he end.|
+00000037
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">echo</span> <span class="o">-</span><span class="n">e</span> <span class="s1">'</span><span class="se">\t</span><span class="s1">'</span> <span class="o">|</span> <span class="n">hexdump</span> <span class="o">-</span><span class="n">C</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>00000000  09 0a                                             |..|
+00000002
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+</div>
+
+
+
+  </div><!-- from https://github.com/utterance/utterances -->
+<script src="https://utteranc.es/client.js"
+        repo="antoinechoffrut/com-net-sec"
+        issue-term="title"
+        label="blogpost-comment"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+</script><a class="u-url" href="/com-net-sec/cheatsheet/cli/macos/2020/05/15/sed-cheatsheet.html" hidden></a>
+</article>
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/com-net-sec/"></data>
+
+  <div class="wrapper">
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col">
+        <p class="feed-subscribe">
+          <a href="/com-net-sec/feed.xml">
+            <svg class="svg-icon orange">
+              <use xlink:href="/com-net-sec/assets/minima-social-icons.svg#rss"></use>
+            </svg><span>Subscribe</span>
+          </a>
+        </p>
+      </div>
+      <div class="footer-col">
+        <p>Ressources on computers, networks, and security</p>
+      </div>
+    </div>
+
+    <div class="social-links"><ul class="social-media-list"><li><a rel="me" href="https://github.com/antoinechoffrut" title="antoinechoffrut"><svg class="svg-icon grey"><use xlink:href="/com-net-sec/assets/minima-social-icons.svg#github"></use></svg></a></li></ul>
+</div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>

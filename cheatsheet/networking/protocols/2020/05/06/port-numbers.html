@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.6.1 -->
+<title>Common TCP and UDP port numbers | On computers, networks, and security</title>
+<meta name="generator" content="Jekyll v4.0.0" />
+<meta property="og:title" content="Common TCP and UDP port numbers" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Definitions and port numbers" />
+<meta property="og:description" content="Definitions and port numbers" />
+<link rel="canonical" href="https://antoinechoffrut.github.io/com-net-sec/cheatsheet/networking/protocols/2020/05/06/port-numbers.html" />
+<meta property="og:url" content="https://antoinechoffrut.github.io/com-net-sec/cheatsheet/networking/protocols/2020/05/06/port-numbers.html" />
+<meta property="og:site_name" content="On computers, networks, and security" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2020-05-06T00:00:00-05:00" />
+<script type="application/ld+json">
+{"description":"Definitions and port numbers","mainEntityOfPage":{"@type":"WebPage","@id":"https://antoinechoffrut.github.io/com-net-sec/cheatsheet/networking/protocols/2020/05/06/port-numbers.html"},"@type":"BlogPosting","url":"https://antoinechoffrut.github.io/com-net-sec/cheatsheet/networking/protocols/2020/05/06/port-numbers.html","headline":"Common TCP and UDP port numbers","dateModified":"2020-05-06T00:00:00-05:00","datePublished":"2020-05-06T00:00:00-05:00","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/com-net-sec/assets/css/style.css"><link type="application/atom+xml" rel="alternate" href="https://antoinechoffrut.github.io/com-net-sec/feed.xml" title="On computers, networks, and security" /><link rel="shortcut icon" type="image/x-icon" href="/com-net-sec/images/favicon.ico"><!-- Begin Jekyll SEO tag v2.6.1 -->
+<title>Common TCP and UDP port numbers | On computers, networks, and security</title>
+<meta name="generator" content="Jekyll v4.0.0" />
+<meta property="og:title" content="Common TCP and UDP port numbers" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Definitions and port numbers" />
+<meta property="og:description" content="Definitions and port numbers" />
+<link rel="canonical" href="https://antoinechoffrut.github.io/com-net-sec/cheatsheet/networking/protocols/2020/05/06/port-numbers.html" />
+<meta property="og:url" content="https://antoinechoffrut.github.io/com-net-sec/cheatsheet/networking/protocols/2020/05/06/port-numbers.html" />
+<meta property="og:site_name" content="On computers, networks, and security" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2020-05-06T00:00:00-05:00" />
+<script type="application/ld+json">
+{"description":"Definitions and port numbers","mainEntityOfPage":{"@type":"WebPage","@id":"https://antoinechoffrut.github.io/com-net-sec/cheatsheet/networking/protocols/2020/05/06/port-numbers.html"},"@type":"BlogPosting","url":"https://antoinechoffrut.github.io/com-net-sec/cheatsheet/networking/protocols/2020/05/06/port-numbers.html","headline":"Common TCP and UDP port numbers","dateModified":"2020-05-06T00:00:00-05:00","datePublished":"2020-05-06T00:00:00-05:00","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+<link href="https://unpkg.com/@primer/css/dist/primer.css" rel="stylesheet" />
+<link rel="stylesheet" href="//use.fontawesome.com/releases/v5.0.7/css/all.css"><link type="application/atom+xml" rel="alternate" href="https://antoinechoffrut.github.io/com-net-sec/feed.xml" title="On computers, networks, and security" />
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js"></script>
+<script type="text/javascript">
+require.config({
+  paths: {
+    jquery: 'https://code.jquery.com/jquery-3.5.0.min',
+    plotly: 'https://cdn.plot.ly/plotly-latest.min'
+  },
+
+  shim: {
+    plotly: {
+      deps: ['jquery'],
+      exports: 'plotly'
+    }
+  }
+});
+</script>
+
+<script>
+function wrap_img(fn) {
+    if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
+        var elements = document.querySelectorAll(".post img");
+        Array.prototype.forEach.call(elements, function(el, i) {
+            if (el.getAttribute("title") && (el.className != "emoji")) {
+                const caption = document.createElement('figcaption');
+                var node = document.createTextNode(el.getAttribute("title"));
+                caption.appendChild(node);
+                const wrapper = document.createElement('figure');
+                wrapper.className = 'image';
+                el.parentNode.insertBefore(wrapper, el);
+                el.parentNode.removeChild(el);
+                wrapper.appendChild(el);
+                wrapper.appendChild(caption);
+            }
+        });
+    } else { document.addEventListener('DOMContentLoaded', fn); }
+}
+window.onload = wrap_img;
+</script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function(){
+    // add link icon to anchor tags
+    var elem = document.querySelectorAll(".anchor-link")
+    elem.forEach(e => (e.innerHTML = '<i class="fas fa-link fa-xs"></i>'));
+    });
+</script>
+</head><body><header class="site-header">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/com-net-sec/">On computers, networks, and security</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/com-net-sec/about/">About</a><a class="page-link" href="/com-net-sec/search/">Search</a><a class="page-link" href="/com-net-sec/categories/">Tags</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">Common TCP and UDP port numbers</h1><p class="page-description">Definitions and port numbers</p><p class="post-meta post-meta-title"><time class="dt-published" datetime="2020-05-06T00:00:00-05:00" itemprop="datePublished">
+        May 6, 2020
+      </time>
+       • <span class="read-time" title="Estimated read time">
+    
+    
+      2 min read
+    
+</span></p>
+
+    
+      <p class="category-tags"><i class="fas fa-tags category-tags-icon"></i></i> 
+      
+        <a class="category-tags-link" href="/com-net-sec/categories/#cheatsheet">cheatsheet</a>
+        &nbsp;
+      
+        <a class="category-tags-link" href="/com-net-sec/categories/#networking">networking</a>
+        &nbsp;
+      
+        <a class="category-tags-link" href="/com-net-sec/categories/#protocols">protocols</a>
+        
+      
+      </p>
+    
+
+    </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <ul class="section-nav">
+<li class="toc-entry toc-h1"><a href="#protocols-tcp-vs-udp">Protocols: TCP vs UDP</a></li>
+<li class="toc-entry toc-h1"><a href="#port-number-ranges">Port number ranges</a></li>
+<li class="toc-entry toc-h1"><a href="#common-tcp-and-udp-port-numbers">Common TCP and UDP port numbers</a></li>
+<li class="toc-entry toc-h1"><a href="#acronyms-and-descriptions">Acronyms and descriptions</a></li>
+<li class="toc-entry toc-h1"><a href="#references">References</a></li>
+</ul><h1 id="protocols-tcp-vs-udp">
+<a class="anchor" href="#protocols-tcp-vs-udp" aria-hidden="true"><span class="octicon octicon-link"></span></a>Protocols: TCP vs UDP</h1>
+<table>
+  <tr>
+    <th width="10%">protocol</th>
+	<th width="40%">TCP</th>
+	<th>UDP</th>
+  </tr>
+  <tr>
+    <td>full name</td>
+    <td> Transmission Control Protocol
+	</td>
+	<td> User Datagram Protocol
+	</td>
+  </tr>
+  <tr>
+    <td>connection</td>
+    <td> connection-oriented 
+	</td>
+	<td> connection-less
+    </td>
+  </tr>
+  <tr>
+    <td>reliability</td>
+    <td> reliable
+	</td>
+	<td> unreliable
+    </td>
+  </tr>
+  <tr>
+    <td>error checking</td>
+    <td> error checking and recovery
+	</td>
+	<td> error checking, no recovery
+    </td>
+  </tr>
+  <tr>
+    <td>acknowledgment</td>
+    <td>acknowledgment
+	</td>
+	<td> no acknowledgment
+    </td>
+  </tr>
+</table>
+
+<h1 id="port-number-ranges">
+<a class="anchor" href="#port-number-ranges" aria-hidden="true"><span class="octicon octicon-link"></span></a>Port number ranges</h1>
+<p>See Section 6, page 10 of <a href="https://www.rfc-editor.org/rfc/rfc6335.txt">RFC6335</a>.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>name</th>
+      <th>range</th>
+      <th>assigned by</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>well-known ports<br>system ports</td>
+      <td>0 - 10234</td>
+      <td>IANA</td>
+    </tr>
+    <tr>
+      <td>user ports<br>registered ports</td>
+      <td>1024 - 49151</td>
+      <td>IANA</td>
+    </tr>
+    <tr>
+      <td>dynamic ports<br>private ports<br>ephemeral ports</td>
+      <td>49152 - 65535</td>
+      <td>never</td>
+    </tr>
+  </tbody>
+</table>
+
+<h1 id="common-tcp-and-udp-port-numbers">
+<a class="anchor" href="#common-tcp-and-udp-port-numbers" aria-hidden="true"><span class="octicon octicon-link"></span></a>Common TCP and UDP port numbers</h1>
+<p>This is the list from the the CompTAI A+ Certification Exam: Core 1
+Objectives 220-1001.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>service</th>
+      <th>protocol/port number</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>FTP</td>
+      <td>TCP/20 (data)<br>TCP/21 (control)</td>
+    </tr>
+    <tr>
+      <td>SSH</td>
+      <td>TCP/22</td>
+    </tr>
+    <tr>
+      <td>Telnet</td>
+      <td>TCP/23</td>
+    </tr>
+    <tr>
+      <td>SMTP</td>
+      <td>TCP/25</td>
+    </tr>
+    <tr>
+      <td>DNS</td>
+      <td>UDP/53</td>
+    </tr>
+    <tr>
+      <td>DHCP</td>
+      <td>UDP/67 (server)<br>UDP/68 (client)</td>
+    </tr>
+    <tr>
+      <td>HTTP</td>
+      <td>TCP/80</td>
+    </tr>
+    <tr>
+      <td>POP3</td>
+      <td>TCP/110</td>
+    </tr>
+    <tr>
+      <td>IMAP4</td>
+      <td>TCP/143</td>
+    </tr>
+    <tr>
+      <td>NetBIOS<br>(name service)</td>
+      <td>UDP/137</td>
+    </tr>
+    <tr>
+      <td>NetBIOS<br>(datagram service)</td>
+      <td>UDP/138</td>
+    </tr>
+    <tr>
+      <td>NetBIOS<br>(session service)</td>
+      <td>TCP/139</td>
+    </tr>
+    <tr>
+      <td>SNMP</td>
+      <td>UDP/161 (get)<br>UDP/162 (trap)</td>
+    </tr>
+    <tr>
+      <td>LDAP</td>
+      <td>TCP,UDP/389</td>
+    </tr>
+    <tr>
+      <td>SLP</td>
+      <td>TCP,UDP/427</td>
+    </tr>
+    <tr>
+      <td>HTTPS</td>
+      <td>TCP/443</td>
+    </tr>
+    <tr>
+      <td>SMB<cifs></cifs>
+</td>
+      <td>TCP/445</td>
+    </tr>
+    <tr>
+      <td>AFP</td>
+      <td>TCP/548</td>
+    </tr>
+    <tr>
+      <td>RDP</td>
+      <td>TCP/3389</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Additional ports</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>service</th>
+      <th>protocol/port number</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>POP3S</td>
+      <td>TCP/995</td>
+    </tr>
+    <tr>
+      <td>IMAPS</td>
+      <td>TCP/993</td>
+    </tr>
+    <tr>
+      <td>PDL</td>
+      <td>TCP/9100</td>
+    </tr>
+    <tr>
+      <td>RADIUS</td>
+      <td>TCP,UDP/1812</td>
+    </tr>
+  </tbody>
+</table>
+
+<h1 id="acronyms-and-descriptions">
+<a class="anchor" href="#acronyms-and-descriptions" aria-hidden="true"><span class="octicon octicon-link"></span></a>Acronyms and descriptions</h1>
+
+<table>
+  <tr>
+    <th width="10%">service</th>
+	<th width="40%">name</th>
+	<th>description</th>
+  </tr>
+  <tr>
+    <td> FTP     </td>
+	<td> File Transfer Protocol                </td>
+	<td> send and receive files between systems
+  </td>
+  </tr>
+  <tr>
+    <td> SSH     </td>
+	<td> Secure SHell                          </td>
+	<td> encrypted console access
+  </td>
+  </tr>
+  <tr>
+    <td> Telnet  </td>
+	<td> Telecommunication Networrk            </td>
+	<td> insecure consle access
+  </td>
+  </tr>
+  <tr>
+    <td> SMTP    </td>
+	<td> Simple Mail Transfer Protocol         </td>
+	<td> transfer emails between servers
+  </td>
+  </tr>
+  <tr>
+    <td> DNS     </td>
+	<td> Domain Name System                    </td>
+	<td> convert domain names into IP addresses
+  </td>
+  </tr>
+  <tr>
+    <td> DHCP    </td>
+	<td> Dynamic Host Configuration Protocol   </td>
+	<td> automated configuration of IP addresses
+  </td>
+  </tr>
+  <tr>
+    <td> HTTP    </td>
+	<td> HyperText Transfer Protocol           </td>
+	<td> web server communication
+  </td>
+  </tr>
+  <tr>
+    <td> POP3    </td>
+	<td> Post Office Protocol v3               </td>
+	<td> email client protocol
+  </td>
+  </tr>
+  <tr>
+    <td> POP3S   </td>
+	<td> POP3 Secure                           </td>
+	<td> email client protocol with encryption
+  </td>
+  </tr>
+  <tr>
+    <td> IMAP4   </td>
+	<td> Internet Message Access Protocol v4   </td>
+	<td> email client protocol
+  </td>
+  </tr>
+  <tr>
+    <td> IMAPS   </td>
+	<td> IMAP Secure                           </td>
+	<td> email client protocol with encryption
+  </td>
+  </tr>
+  <tr>
+    <td> HTTPS   </td>
+	<td> HTTP Secure                           </td>
+	<td> web server communication with encryption
+  </td>
+  </tr>
+  <tr>
+    <td> NetBIOS </td>
+	<td> NetBIOS name service                  </td>
+	<td> register, remove, and find Windows service by name
+  </td>
+  </tr>
+  <tr>
+    <td> NetBIOS </td>
+	<td> NetBIOS datagram service              </td>
+	<td> Windows connection-less data transfer
+  </td>
+  </tr>
+  <tr>
+    <td> NetBIOS </td>
+	<td> NetBIOS session service               </td>
+	<td> Windows connection-oriented data transfer
+  </td>
+  </tr>
+  <tr>
+    <td> SNMP    </td>
+	<td> Simple Network Management Protocol    </td>
+	<td> gather statistics from networks
+  </td>
+  </tr>
+  <tr>
+    <td> LDAP    </td>
+	<td> Lightweight Domain Access Protocol    </td>
+	<td> management and authentication on network
+  </td>
+  </tr>
+  <tr>
+    <td> SLP     </td>
+	<td> Service Location Protocol             </td>
+	<td> (macos?) service discovery
+  </td>
+  </tr>
+  <tr>
+    <td> SMB     </td>
+	<td> Server Message Block                  </td>
+	<td> Windows file transfer and printer sharing
+  </td>
+  </tr>
+  <tr>
+    <td> CIFS    </td>
+	<td> Common Internet File System           </td>
+	<td> Windows file transfer and printer sharing
+  </td>
+  </tr>
+  <tr>
+    <td> AFP     </td>
+	<td> Apple Filing Protocol                 </td>
+	<td> macos file transfer
+  </td>
+  </tr>
+  <tr>
+    <td> RDP     </td>
+	<td> Remote Desktop Protocol               </td>
+	<td> graphical display of remote devices
+  </td>
+  </tr>
+  <tr>
+    <td> PDL     </td>
+	<td> Page Description Language data stream </td>
+	<td> raw data stream for printing
+  </td>
+  </tr>
+  <tr>
+    <td> SLP     </td>
+	<td> Service Location Protocol             </td>
+	<td> service discovery protocol
+  </td>
+  </tr>
+  <tr>
+    <td> AFP     </td>
+	<td> Apple File Protocol                   </td>
+	<td> Apple's proprietary file sharing network protocol
+  </td>
+  </tr>
+  <tr>
+    <td> RADIUS  </td>
+	<td> Remote Authentication<br>             </td>
+	<td>
+  </td>
+  </tr>
+</table>
+
+<h1 id="references">
+<a class="anchor" href="#references" aria-hidden="true"><span class="octicon octicon-link"></span></a>References</h1>
+<ul>
+  <li>
+<a href="https://www.iana.org/assignments/service-names-port-numbers/service-names-port-numbers.xhtml">IANA: Service names and transport protocol port number
+registry</a>
+(<a href="https://tools.ietf.org/html/rfc6335">RFC6335</a>)</li>
+  <li>RFC1700: <a href="https://www.ietf.org/rfc/rfc1700.txt">.txt</a>,  <a href="https://www.ietf.org/rfc/rfc1700.txt.pdf">.pdf</a> (ietf.org)</li>
+  <li>Wikipedia: <a href="https://en.wikipedia.org/wiki/List_of_TCP_and_UDP_port_numbers#Well-known_ports">Well-known
+ports</a>,
+in “List of TCP and UDP port numbers”</li>
+</ul>
+
+  </div><a class="u-url" href="/com-net-sec/cheatsheet/networking/protocols/2020/05/06/port-numbers.html" hidden></a>
+</article>
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/com-net-sec/"></data>
+
+  <div class="wrapper">
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col">
+        <p class="feed-subscribe">
+          <a href="/com-net-sec/feed.xml">
+            <svg class="svg-icon orange">
+              <use xlink:href="/com-net-sec/assets/minima-social-icons.svg#rss"></use>
+            </svg><span>Subscribe</span>
+          </a>
+        </p>
+      </div>
+      <div class="footer-col">
+        <p>Ressources on computers, networks, and security</p>
+      </div>
+    </div>
+
+    <div class="social-links"><ul class="social-media-list"><li><a rel="me" href="https://github.com/antoinechoffrut" title="antoinechoffrut"><svg class="svg-icon grey"><use xlink:href="/com-net-sec/assets/minima-social-icons.svg#github"></use></svg></a></li></ul>
+</div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>

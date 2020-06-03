@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.6.1 -->
+<title>Wireless network technologies | On computers, networks, and security</title>
+<meta name="generator" content="Jekyll v4.0.0" />
+<meta property="og:title" content="Wireless network technologies" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="IEEE 802.11, Bluetooth, Zigbee and Z-Wave" />
+<meta property="og:description" content="IEEE 802.11, Bluetooth, Zigbee and Z-Wave" />
+<link rel="canonical" href="https://antoinechoffrut.github.io/com-net-sec/cheatsheet/wireless/protocols/2020/05/29/wireless-network-technologies.html" />
+<meta property="og:url" content="https://antoinechoffrut.github.io/com-net-sec/cheatsheet/wireless/protocols/2020/05/29/wireless-network-technologies.html" />
+<meta property="og:site_name" content="On computers, networks, and security" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2020-05-29T00:00:00-05:00" />
+<script type="application/ld+json">
+{"description":"IEEE 802.11, Bluetooth, Zigbee and Z-Wave","mainEntityOfPage":{"@type":"WebPage","@id":"https://antoinechoffrut.github.io/com-net-sec/cheatsheet/wireless/protocols/2020/05/29/wireless-network-technologies.html"},"@type":"BlogPosting","url":"https://antoinechoffrut.github.io/com-net-sec/cheatsheet/wireless/protocols/2020/05/29/wireless-network-technologies.html","headline":"Wireless network technologies","dateModified":"2020-05-29T00:00:00-05:00","datePublished":"2020-05-29T00:00:00-05:00","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/com-net-sec/assets/css/style.css"><link type="application/atom+xml" rel="alternate" href="https://antoinechoffrut.github.io/com-net-sec/feed.xml" title="On computers, networks, and security" /><link rel="shortcut icon" type="image/x-icon" href="/com-net-sec/images/favicon.ico"><!-- Begin Jekyll SEO tag v2.6.1 -->
+<title>Wireless network technologies | On computers, networks, and security</title>
+<meta name="generator" content="Jekyll v4.0.0" />
+<meta property="og:title" content="Wireless network technologies" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="IEEE 802.11, Bluetooth, Zigbee and Z-Wave" />
+<meta property="og:description" content="IEEE 802.11, Bluetooth, Zigbee and Z-Wave" />
+<link rel="canonical" href="https://antoinechoffrut.github.io/com-net-sec/cheatsheet/wireless/protocols/2020/05/29/wireless-network-technologies.html" />
+<meta property="og:url" content="https://antoinechoffrut.github.io/com-net-sec/cheatsheet/wireless/protocols/2020/05/29/wireless-network-technologies.html" />
+<meta property="og:site_name" content="On computers, networks, and security" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2020-05-29T00:00:00-05:00" />
+<script type="application/ld+json">
+{"description":"IEEE 802.11, Bluetooth, Zigbee and Z-Wave","mainEntityOfPage":{"@type":"WebPage","@id":"https://antoinechoffrut.github.io/com-net-sec/cheatsheet/wireless/protocols/2020/05/29/wireless-network-technologies.html"},"@type":"BlogPosting","url":"https://antoinechoffrut.github.io/com-net-sec/cheatsheet/wireless/protocols/2020/05/29/wireless-network-technologies.html","headline":"Wireless network technologies","dateModified":"2020-05-29T00:00:00-05:00","datePublished":"2020-05-29T00:00:00-05:00","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+<link href="https://unpkg.com/@primer/css/dist/primer.css" rel="stylesheet" />
+<link rel="stylesheet" href="//use.fontawesome.com/releases/v5.0.7/css/all.css"><link type="application/atom+xml" rel="alternate" href="https://antoinechoffrut.github.io/com-net-sec/feed.xml" title="On computers, networks, and security" />
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js"></script>
+<script type="text/javascript">
+require.config({
+  paths: {
+    jquery: 'https://code.jquery.com/jquery-3.5.0.min',
+    plotly: 'https://cdn.plot.ly/plotly-latest.min'
+  },
+
+  shim: {
+    plotly: {
+      deps: ['jquery'],
+      exports: 'plotly'
+    }
+  }
+});
+</script>
+
+<script>
+function wrap_img(fn) {
+    if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
+        var elements = document.querySelectorAll(".post img");
+        Array.prototype.forEach.call(elements, function(el, i) {
+            if (el.getAttribute("title") && (el.className != "emoji")) {
+                const caption = document.createElement('figcaption');
+                var node = document.createTextNode(el.getAttribute("title"));
+                caption.appendChild(node);
+                const wrapper = document.createElement('figure');
+                wrapper.className = 'image';
+                el.parentNode.insertBefore(wrapper, el);
+                el.parentNode.removeChild(el);
+                wrapper.appendChild(el);
+                wrapper.appendChild(caption);
+            }
+        });
+    } else { document.addEventListener('DOMContentLoaded', fn); }
+}
+window.onload = wrap_img;
+</script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function(){
+    // add link icon to anchor tags
+    var elem = document.querySelectorAll(".anchor-link")
+    elem.forEach(e => (e.innerHTML = '<i class="fas fa-link fa-xs"></i>'));
+    });
+</script>
+</head><body><header class="site-header">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/com-net-sec/">On computers, networks, and security</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/com-net-sec/about/">About</a><a class="page-link" href="/com-net-sec/search/">Search</a><a class="page-link" href="/com-net-sec/categories/">Tags</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">Wireless network technologies</h1><p class="page-description">IEEE 802.11, Bluetooth, Zigbee and Z-Wave</p><p class="post-meta post-meta-title"><time class="dt-published" datetime="2020-05-29T00:00:00-05:00" itemprop="datePublished">
+        May 29, 2020
+      </time>
+       • <span class="read-time" title="Estimated read time">
+    
+    
+      1 min read
+    
+</span></p>
+
+    
+      <p class="category-tags"><i class="fas fa-tags category-tags-icon"></i></i> 
+      
+        <a class="category-tags-link" href="/com-net-sec/categories/#cheatsheet">cheatsheet</a>
+        &nbsp;
+      
+        <a class="category-tags-link" href="/com-net-sec/categories/#wireless">wireless</a>
+        &nbsp;
+      
+        <a class="category-tags-link" href="/com-net-sec/categories/#protocols">protocols</a>
+        
+      
+      </p>
+    
+
+    </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <ul class="section-nav">
+<li class="toc-entry toc-h1"><a href="#the-80211-standards">The 802.11 standards</a>
+<ul>
+<li class="toc-entry toc-h2"><a href="#channels-and-frequencies">Channels and frequencies</a></li>
+</ul>
+</li>
+<li class="toc-entry toc-h1"><a href="#bluetooth">Bluetooth</a>
+<ul>
+<li class="toc-entry toc-h2"><a href="#classification">Classification</a></li>
+<li class="toc-entry toc-h2"><a href="#specifications">Specifications</a></li>
+</ul>
+</li>
+<li class="toc-entry toc-h1"><a href="#references">References</a></li>
+</ul><h1 id="the-80211-standards">
+<a class="anchor" href="#the-80211-standards" aria-hidden="true"><span class="octicon octicon-link"></span></a>The 802.11 standards</h1>
+<table>
+  <tr>
+    <th>standard</th>
+	<th>freq</th>
+	<th>max<br>throughput<br>(total)</th>
+	<th>max<br>MIMO<br>streams</th>
+	<th>max<br>throughput<br>(per stream)</th>
+	<th>band-<br>width</th>
+	<th>max<br>range<br>(indoor)</th>
+	<th>back-<br>ward<br>compat-<br>ibility</th>
+	<th>year</th>
+  </tr>
+  <tr>
+    <td>802.11<b>a</b>
+</td>
+    <td>5.0 GHz</td>
+	<td>54 Mbps</td>
+	<td> - </td>
+	<td>54 Mbps</td>
+	<td>20 MHz</td>
+	<td>35 m</td>
+	<td> - </td>
+	<td>1999</td>
+  </tr>
+  <tr>
+    <td>802.11<b>b</b>               </td>
+	<td>2.4 GHz            </td>
+	<td>11 Mbps                        </td>
+	<td> - </td>
+	<td>11 Mbps</td>
+	<td>22 MHz                 </td>
+	<td>35 m                   </td>
+	<td>-                          </td>
+	<td>1999</td>
+  </tr>
+  <tr>
+    <td>802.11<b>g</b>               </td>
+	<td>2.4 GHz            </td>
+	<td>54 Mbps                        </td>
+	<td> - </td>
+	<td>54 Mbps</td>
+	<td>20 MHz                 </td>
+	<td>38 m                   </td>
+	<td>802.11<b>b</b>                </td>
+	<td>2003</td>
+  </tr>
+  <tr>
+    <td>802.11<b>n</b>
+</td>
+	<td>2.4 GHz<br>5.0 GHz </td>
+	<td>600 Mbps</td>
+	<td>4 MIMO</td>
+	<td>150 Mbps</td>
+	<td>24, 40 MHz             </td>
+	<td>70 m                   </td>
+	<td>802.11<b>a</b>/<b>b</b>/<b>g</b>
+</td>
+	<td>2009</td>
+  </tr>
+  <tr>
+    <td>802.11<b>ac</b>
+</td>
+	<td>5.0 GHz            </td>
+	<td>6.8 Gbps </td>
+	<td>8 MU-MIMO</td>
+	<td>866.7 MHz</td>
+	<td>20, 40,<br>80, 160 MHz </td>
+	<td>35 m                   </td>
+	<td>802.11<b>a</b>/<b>n</b>          </td>
+	<td>2013</td>
+  </tr>
+</table>
+
+<h2 id="channels-and-frequencies">
+<a class="anchor" href="#channels-and-frequencies" aria-hidden="true"><span class="octicon octicon-link"></span></a>Channels and frequencies</h2>
+
+<table>
+  <tr>
+    <th width="10%">band name</th>
+	<th width="40%">frequency band</th>
+	<th>non-overlapping 20 MHz-wide channels</th>
+  </tr>
+  <tr>
+    <td>2.4 GHz</td>
+	<td>2.400-2.500GHz</td>
+	<td>3 (#1, #6, #11 of 11 available)</td>
+  </tr>
+  <tr>
+    <td>5.0 GHz</td>
+	<td>4.915–5.825 GHz</td>
+	<td>23</td>
+  </tr>
+</table>
+
+<h1 id="bluetooth">
+<a class="anchor" href="#bluetooth" aria-hidden="true"><span class="octicon octicon-link"></span></a>Bluetooth</h1>
+<ul>
+  <li>Bluetooth is a short-range wireless interconnetion of mobile phones,
+computers and other electronic devices.</li>
+  <li>Devices operate in the 2.4 to 2.485 GHz radio frequency range and
+are typically used for PANs.</li>
+</ul>
+
+<h2 id="classification">
+<a class="anchor" href="#classification" aria-hidden="true"><span class="octicon octicon-link"></span></a>Classification</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th> </th>
+      <th>max. permitted power</th>
+      <th>approximate distance</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>class 1</td>
+      <td>100 mW</td>
+      <td>~330 ft (100 m)</td>
+    </tr>
+    <tr>
+      <td>class 2<br>(most common)</td>
+      <td>2.5 mW</td>
+      <td>~30 ft (10 m)</td>
+    </tr>
+    <tr>
+      <td>class 3</td>
+      <td>1 mW</td>
+      <td>~3 ft (1 m)</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="specifications">
+<a class="anchor" href="#specifications" aria-hidden="true"><span class="octicon octicon-link"></span></a>Specifications</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>specification</th>
+      <th>version</th>
+      <th>data transfer rate</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>1.0</td>
+      <td>v1.2</td>
+      <td>1 Mbps</td>
+    </tr>
+    <tr>
+      <td>2.0</td>
+      <td>v2.0 + EDR</td>
+      <td>3 Mbps</td>
+    </tr>
+    <tr>
+      <td>3.0</td>
+      <td>v3.0 + HS</td>
+      <td>24 Mbps</td>
+    </tr>
+    <tr>
+      <td>4.0</td>
+      <td>v4.0 + LE</td>
+      <td>1 Mbps</td>
+    </tr>
+    <tr>
+      <td>5.0</td>
+      <td>v5.0 + LE</td>
+      <td>125 Kbps, 500 Kbps, 1 Mbps, 2 Mbps</td>
+    </tr>
+  </tbody>
+</table>
+
+<h1 id="references">
+<a class="anchor" href="#references" aria-hidden="true"><span class="octicon octicon-link"></span></a>References</h1>
+<ul>
+  <li>Professor Messer:
+    <ul>
+      <li><a href="https://www.professormesser.com/free-a-plus-training/220-1001/802-11-wireless-standards/">802.11 wireless standards - CompTIA A+ 220-1001</a></li>
+      <li><a href="https://www.professormesser.com/free-a-plus-training/220-1001/wireless-network-technologies-2/">Wireless network technologies - CompTIA A+
+220-1101</a></li>
+      <li><a href="https://www.professormesser.com/free-a-plus-training/220-901/wireless-interface-speeds-and-distances/">Wireless interface speeds and distances - CompTIA A+
+220-901</a></li>
+    </ul>
+  </li>
+  <li>Wikipedia:
+    <ul>
+      <li><a href="https://en.wikipedia.org/wiki/IEEE_802.11#Protocol">IEEE 802.11: Protocol</a></li>
+      <li><a href="https://en.wikipedia.org/wiki/IEEE_802.11#Channels_and_frequencies">IEEE 802.11: Channels and frequencies</a></li>
+      <li><a href="https://en.wikipedia.org/wiki/Bluetooth">Bluetooth</a></li>
+    </ul>
+  </li>
+  <li>
+<a href="https://www.biggeritsolutions.com">David Bigger</a>, CompTIA A+ course</li>
+  <li><a href="https://metis.fi/en/2018/02/5ghz-channels/">Metis: WiFi 5GHz band and wide
+channels</a></li>
+  <li><a href="https://flylib.com/books/en/4.215.1.116/1/">Flylib: The Bluetooth
+protocol</a></li>
+</ul>
+
+  </div><a class="u-url" href="/com-net-sec/cheatsheet/wireless/protocols/2020/05/29/wireless-network-technologies.html" hidden></a>
+</article>
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/com-net-sec/"></data>
+
+  <div class="wrapper">
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col">
+        <p class="feed-subscribe">
+          <a href="/com-net-sec/feed.xml">
+            <svg class="svg-icon orange">
+              <use xlink:href="/com-net-sec/assets/minima-social-icons.svg#rss"></use>
+            </svg><span>Subscribe</span>
+          </a>
+        </p>
+      </div>
+      <div class="footer-col">
+        <p>Ressources on computers, networks, and security</p>
+      </div>
+    </div>
+
+    <div class="social-links"><ul class="social-media-list"><li><a rel="me" href="https://github.com/antoinechoffrut" title="antoinechoffrut"><svg class="svg-icon grey"><use xlink:href="/com-net-sec/assets/minima-social-icons.svg#github"></use></svg></a></li></ul>
+</div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>
